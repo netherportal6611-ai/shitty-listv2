@@ -26,6 +26,7 @@
     .player-subtabs{display:flex;gap:5px;margin-bottom:15px;border-bottom:1px solid var(--line)}.subtab{border:0;border-bottom:2px solid transparent;background:transparent;color:var(--muted);padding:10px 14px;text-transform:uppercase;letter-spacing:.1em;font-size:10px;font-weight:850;cursor:pointer}.subtab:hover{color:var(--text)}.subtab.active{color:#fff;border-bottom-color:#fff}
     .user-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.user-card{display:flex;align-items:center;gap:13px;padding:13px;border:1px solid var(--line);background:var(--panel);cursor:pointer;transition:.17s}.user-card:hover{border-color:var(--line2);background:var(--panel2);transform:translateY(-1px)}.user-avatar,.profile-avatar{border-radius:50%;object-fit:cover;background:#20252b;border:1px solid var(--line2)}.user-avatar{width:46px;height:46px}.avatar-fallback{display:grid;place-items:center;font-weight:950;color:#fff}.user-info{min-width:0}.user-name{font-size:14px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.user-bio{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}
     .profile-shell{border:1px solid var(--line);background:linear-gradient(145deg,rgba(255,255,255,.025),transparent 45%),var(--panel)}.profile-hero{display:grid;grid-template-columns:104px minmax(0,1fr) auto;gap:20px;align-items:center;padding:25px;border-bottom:1px solid var(--line)}.profile-avatar{width:104px;height:104px}.profile-main{min-width:0}.profile-name{font-size:27px;line-height:1.1;font-weight:950;letter-spacing:-.04em}.profile-bio{max-width:650px;margin-top:8px;color:var(--soft);white-space:pre-wrap}.profile-stats{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--line)}.profile-stat{padding:17px 22px;border-right:1px solid var(--line)}.profile-stat:last-child{border-right:0}.profile-stat strong{display:block;font-size:22px}.profile-stat span{font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:850}.profile-sections{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line)}.profile-section{background:var(--panel);padding:18px}.profile-section h3{font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin:0 0 11px;color:var(--soft)}.profile-item{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:11px}.profile-item:first-of-type{border-top:0}.profile-item span{color:var(--muted)}
+    .image-picker{display:flex;align-items:center;gap:13px;padding:10px;border:1px dashed var(--line2);background:#0c0e11}.image-preview{width:90px;height:62px;object-fit:cover;border:1px solid var(--line);background:var(--panel2)}.image-preview.avatar-preview{width:62px;height:62px;border-radius:50%}.image-picker-copy{display:grid;gap:6px}.image-picker input{max-width:100%;font-size:11px;color:var(--muted)}
     dialog{width:min(580px,calc(100vw - 24px));border:1px solid var(--line2);border-radius:14px;background:linear-gradient(155deg,#161a1f,#101317);color:var(--text);padding:0;box-shadow:0 28px 90px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.025);overflow:hidden}dialog[open]{animation:dialogIn .18s ease}dialog::backdrop{background:rgba(0,0,0,.78);backdrop-filter:blur(5px)}.dlg-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:17px 19px;background:rgba(255,255,255,.015)}.dlg-head h2{font-size:16px;margin:0;letter-spacing:-.02em}.dlg-body{padding:20px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:grid;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.11em;font-weight:800}.field input,.field select,.field textarea{width:100%;background:#0c0e11;color:var(--text);border:1px solid var(--line);border-radius:7px;padding:10px 11px;transition:border-color .15s,box-shadow .15s}.field input:focus,.field select:focus,.field textarea:focus{border-color:#697684;box-shadow:0 0 0 3px rgba(135,151,168,.08);outline:0}.field textarea{resize:vertical;min-height:76px}.dlg-actions{display:flex;justify-content:flex-end;gap:8px;padding:14px 19px;border-top:1px solid var(--line);background:rgba(0,0,0,.13)}.hint{font-size:11px;color:var(--muted);margin:10px 0 0}.sep{height:1px;background:var(--line);margin:18px 0}
     .toast{position:fixed;right:18px;bottom:18px;min-width:220px;background:#171b20;color:var(--text);border:1px solid var(--line2);border-left:3px solid var(--ok);border-radius:8px;padding:11px 14px;box-shadow:0 16px 44px rgba(0,0,0,.45);font-weight:750;font-size:12px;transform:translateY(80px);opacity:0;transition:.22s;z-index:40}.toast.error{border-left-color:var(--danger)}.toast.info{border-left-color:#6baed0}.toast.show{transform:none;opacity:1}.loading-bar{position:fixed;top:0;left:0;right:0;height:2px;z-index:80;overflow:hidden;background:transparent}.loading-bar::after{content:"";display:block;width:35%;height:100%;background:linear-gradient(90deg,transparent,#dfe4e8,transparent);animation:loadingMove 1s linear infinite}.loading-bar.hidden{display:none}.mobile-menu{display:none}.sidebar-overlay{display:none}.account-menu{position:relative;align-self:center}.account-button{display:flex;align-items:center;gap:8px;border:1px solid var(--line2);background:var(--panel2);padding:5px 9px 5px 6px;color:var(--text);cursor:pointer}.account-avatar{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--text);color:#0a0c0f;font-weight:900;font-size:12px}.account-label{font-size:11px;font-weight:800}.account-popover{display:none;position:absolute;right:0;top:calc(100% + 8px);width:230px;padding:12px;background:#15191e;border:1px solid var(--line2);border-radius:9px;box-shadow:0 18px 50px rgba(0,0,0,.55)}.account-menu.open .account-popover{display:block;animation:popoverIn .15s ease}.account-role{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--ok);font-weight:850}.account-email{font-size:11px;color:var(--soft);margin:4px 0 10px;overflow:hidden;text-overflow:ellipsis}.hidden{display:none!important}
     .btn{transition:background .15s,border-color .15s,color .15s,transform .1s}.btn:active{transform:translateY(1px);filter:brightness(.9)}.filter{transition:background .15s,border-color .15s,color .15s,transform .12s}.filter:active{transform:translateX(2px)}.details{animation:detailsIn .18s ease}
@@ -127,6 +128,7 @@
           <div class="field"><label for="level-verifier">Verificador</label><input id="level-verifier" maxlength="40" list="players-datalist"></div>
           <div class="field"><label for="level-atts">Intentos</label><input id="level-atts" inputmode="numeric" maxlength="12"></div>
           <div class="field"><label for="level-video">Video / showcase (URL)</label><input id="level-video" type="url"></div>
+          <div class="field full"><label for="level-image-file">Miniatura</label><div class="image-picker"><img class="image-preview" id="level-image-preview" alt=""><div class="image-picker-copy"><input id="level-image-file" type="file" accept="image/png,image/jpeg,image/webp,image/gif"><span class="hint" style="margin:0">Elegí una imagen desde tu dispositivo.</span></div></div></div>
           <div class="field full"><label for="level-notes">Descripción</label><textarea id="level-notes" maxlength="400"></textarea></div>
         </div>
         <div class="sep"></div>
@@ -166,7 +168,7 @@
       <div class="dlg-body">
         <div class="form-grid">
           <div class="field full"><label for="profile-name">Nombre</label><input id="profile-name" required maxlength="40"></div>
-          <div class="field full"><label for="profile-photo">Foto de perfil (URL)</label><input id="profile-photo" type="url" placeholder="https://..."></div>
+          <div class="field full"><label for="profile-photo-file">Foto de perfil</label><div class="image-picker"><img class="image-preview avatar-preview" id="profile-photo-preview" alt=""><div class="image-picker-copy"><input id="profile-photo-file" type="file" accept="image/png,image/jpeg,image/webp,image/gif"><span class="hint" style="margin:0">Elegí una imagen desde tu dispositivo.</span></div></div></div>
           <div class="field full"><label for="profile-bio">Descripción</label><textarea id="profile-bio" maxlength="300" placeholder="Contá algo sobre vos..."></textarea></div>
         </div>
       </div>
@@ -179,6 +181,7 @@
   <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
   import { getDatabase, ref, set, update, get, onValue } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-database.js";
+  import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-storage.js";
   import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
 
   const firebaseConfig = {
@@ -194,6 +197,7 @@
 
   const firebaseApp = initializeApp(firebaseConfig);
   const database = getDatabase(firebaseApp);
+  const storage = getStorage(firebaseApp);
   const auth = getAuth(firebaseApp);
 
   (() => {
@@ -205,7 +209,7 @@
     const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
     const clone = o => JSON.parse(JSON.stringify(o));
     let state = load(), page = "levels", query = "", difficulty = "", openLevels = new Set(), openPlayers = new Set(), pendingConfirm = null;
-    let profiles = {}, playerView = "ranking", viewedProfileUid = null;
+    let profiles = {}, playerView = "ranking", viewedProfileUid = null, editingLevelImage = "", editingProfileImage = "";
     const ADMIN_EMAIL = "netherportal6611@gmail.com";
     let currentUser = null, isAdmin = false;
     function load(){localStorage.removeItem(KEY);return clone(seed)}
@@ -345,32 +349,51 @@
       if(!currentUser)return openGoogleAuth();
       const p=profiles[currentUser.uid]||{};
       $("#profile-name").value=p.name||currentUser.displayName||"";
-      $("#profile-photo").value=p.photoURL||currentUser.photoURL||"";
+      editingProfileImage=p.photoURL||currentUser.photoURL||"";
+      $("#profile-photo-file").value="";
+      $("#profile-photo-preview").src=editingProfileImage||"";
       $("#profile-bio").value=p.bio||"";
       $("#profile-dialog").showModal();
+    }
+    async function uploadImage(file,path){
+      if(!file)return "";
+      if(!file.type.startsWith("image/"))throw new Error("invalid-image");
+      if(file.size>5*1024*1024)throw new Error("image-too-large");
+      const ext=(file.name.split(".").pop()||"jpg").replace(/[^a-z0-9]/gi,"").toLowerCase();
+      const target=storageRef(storage,`${path}/${Date.now()}.${ext}`);
+      const result=await uploadBytes(target,file,{contentType:file.type});
+      return getDownloadURL(result.ref);
     }
     async function submitProfile(e){
       e.preventDefault();if(!currentUser)return;
       const name=$("#profile-name").value.trim();if(!name)return $("#profile-name").focus();
       try{
-        await update(ref(database,`profiles/${currentUser.uid}`),{name,photoURL:$("#profile-photo").value.trim(),bio:$("#profile-bio").value.trim(),updatedAt:Date.now()});
+        const file=$("#profile-photo-file").files[0];
+        const photoURL=file?await uploadImage(file,`profiles/${currentUser.uid}`):editingProfileImage;
+        await update(ref(database,`profiles/${currentUser.uid}`),{name,photoURL,bio:$("#profile-bio").value.trim(),updatedAt:Date.now()});
         $("#profile-dialog").close();toast("Perfil actualizado");
-      }catch(err){console.error(err);toast("Firebase no permitió guardar el perfil","error")}
+      }catch(err){console.error(err);toast(err.message==="image-too-large"?"La imagen supera los 5 MB":"No se pudo subir la imagen","error")}
     }
     function switchPage(next){
       page=next;if(next==="profile"&&!viewedProfileUid)viewedProfileUid=currentUser?.uid||null;$$(".tab").forEach(b=>b.classList.toggle("active",b.dataset.page===next));$$(".page").forEach(p=>p.classList.toggle("active",p.id===`page-${next}`));$("#search").placeholder=next==="levels"?"Nivel, creador o verificador…":next==="players"?"Nombre del jugador o usuario…":"Buscar…";render();
     }
     function openLevel(id){
       const l=id?state.levels.find(x=>x.uid===id):null;
+      editingLevelImage=l?.image||"";$("#level-image-file").value="";$("#level-image-preview").src=editingLevelImage||"";
       $("#level-dialog-title").textContent=l?"Editar nivel":"Agregar nivel";$("#level-uid").value=l?.uid||"";$("#level-name").value=l?.name||"";$("#level-id").value=l?.gdId||"";$("#level-diff").value=l?.difficulty||"Extreme Demon";$("#level-creator").value=l?.creator||"";$("#level-verifier").value=l?.verifier||"";$("#level-atts").value=l?.attempts||"";$("#level-video").value=l?.video||"";$("#level-notes").value=l?.notes||"";$("#completion-fields").innerHTML="";(l?.completions||[]).forEach(addCompletionField);$("#level-dialog").showModal();setTimeout(()=>$("#level-name").focus(),50);
     }
     function addCompletionField(c={}){
       const row=document.createElement("div");row.className="form-grid completion-edit";row.style.marginBottom="8px";row.innerHTML=`<div class="field"><label>Jugador</label><input class="comp-player" maxlength="40" list="players-datalist" value="${esc(c.player||"")}"></div><div class="field"><label>Intentos</label><div style="display:flex;gap:6px"><input class="comp-atts" inputmode="numeric" value="${esc(c.attempts||"")}"><button type="button" class="icon remove-completion">×</button></div></div>`;$("#completion-fields").append(row);
     }
-    function submitLevel(e){
+    async function submitLevel(e){
       e.preventDefault();const name=$("#level-name").value.trim();if(!name){$("#level-name").focus();return}
-      const data={uid:$("#level-uid").value||uid(),name,gdId:$("#level-id").value.trim(),difficulty:$("#level-diff").value,creator:$("#level-creator").value.trim(),verifier:$("#level-verifier").value.trim(),attempts:$("#level-atts").value.trim(),video:$("#level-video").value.trim(),notes:$("#level-notes").value.trim(),completions:$$(".completion-edit").map(r=>({player:r.querySelector(".comp-player").value.trim(),attempts:r.querySelector(".comp-atts").value.trim()})).filter(c=>c.player)};
-      const i=state.levels.findIndex(x=>x.uid===data.uid);if(i<0)state.levels.push(data);else state.levels[i]={...state.levels[i],...data};$("#level-dialog").close();save(i<0?"Nivel agregado":"Nivel actualizado");
+      const levelUid=$("#level-uid").value||uid();
+      try{
+        const file=$("#level-image-file").files[0];
+        const image=file?await uploadImage(file,`level-thumbnails/${levelUid}`):editingLevelImage;
+        const data={uid:levelUid,name,image,gdId:$("#level-id").value.trim(),difficulty:$("#level-diff").value,creator:$("#level-creator").value.trim(),verifier:$("#level-verifier").value.trim(),attempts:$("#level-atts").value.trim(),video:$("#level-video").value.trim(),notes:$("#level-notes").value.trim(),completions:$$(".completion-edit").map(r=>({player:r.querySelector(".comp-player").value.trim(),attempts:r.querySelector(".comp-atts").value.trim()})).filter(c=>c.player)};
+        const i=state.levels.findIndex(x=>x.uid===data.uid);if(i<0)state.levels.push(data);else state.levels[i]={...state.levels[i],...data};$("#level-dialog").close();save(i<0?"Nivel agregado":"Nivel actualizado");
+      }catch(err){console.error(err);toast(err.message==="image-too-large"?"La miniatura supera los 5 MB":"No se pudo subir la miniatura","error")}
     }
     function openPlayer(name=""){
       const p=state.players.find(x=>x.name.toLowerCase()===name.toLowerCase());$("#player-dialog-title").textContent=p?"Renombrar jugador":"Agregar jugador";$("#player-uid").value=p?.uid||"";$("#player-name").value=p?.name||"";$("#player-dialog").showModal();setTimeout(()=>$("#player-name").focus(),50);
@@ -464,6 +487,14 @@
     $("#sidebar-overlay").onclick=()=>setSidebar(false);
     document.addEventListener("click",e=>{if(!e.target.closest("#account-menu"))$("#account-menu").classList.remove("open")});
     $("#sync-btn").onclick=()=>save("Lista guardada en Firebase");
+    function previewSelected(input,preview){
+      const file=input.files[0];if(!file)return;
+      if(!file.type.startsWith("image/")){input.value="";return toast("Elegí un archivo de imagen","error")}
+      if(file.size>5*1024*1024){input.value="";return toast("La imagen supera los 5 MB","error")}
+      preview.src=URL.createObjectURL(file);
+    }
+    $("#profile-photo-file").addEventListener("change",e=>previewSelected(e.target,$("#profile-photo-preview")));
+    $("#level-image-file").addEventListener("change",e=>previewSelected(e.target,$("#level-image-preview")));
     $("#search").addEventListener("input",e=>{query=e.target.value;render()});$("#add-level").onclick=()=>openLevel();$("#add-player").onclick=()=>openPlayer();$("#add-completion").onclick=()=>addCompletionField();$("#level-form").addEventListener("submit",submitLevel);$("#player-form").addEventListener("submit",submitPlayer);$("#profile-form").addEventListener("submit",submitProfile);
     $("#confirm-dialog").addEventListener("close",()=>{if($("#confirm-dialog").returnValue==="default"&&pendingConfirm)pendingConfirm();pendingConfirm=null});
     $("#import-btn").onclick=()=>$("#import-file").click();$("#import-file").onchange=async e=>{try{const x=JSON.parse(await e.target.files[0].text());if(!Array.isArray(x.levels)||!Array.isArray(x.players))throw 0;state=x;save("Datos importados")}catch(err){toast("El archivo no es válido")}e.target.value=""};
