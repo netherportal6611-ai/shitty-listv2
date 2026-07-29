@@ -13,9 +13,9 @@
     .brand{height:58px;display:flex;align-items:center;gap:10px;padding:0 18px;border-bottom:1px solid var(--line);font-weight:850;letter-spacing:.08em;text-transform:uppercase}.mark{width:20px;height:20px;border:2px solid var(--text);display:grid;place-items:center;font-size:9px}.brand span{color:var(--muted)}
     .side-inner{padding:18px}.eyebrow{color:var(--muted);font-size:10px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;margin:0 0 8px}
     .search{width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:0;color:var(--text);padding:10px 11px}.search::placeholder{color:#6f777d}
-    .filters{display:grid;gap:5px;margin-top:8px}.filter{width:100%;display:flex;align-items:center;gap:9px;text-align:left;background:transparent;border:1px solid transparent;padding:7px 10px;color:var(--muted);cursor:pointer}.filter:hover,.filter.active{background:var(--panel2);border-color:var(--line);color:var(--text)}.difficulty-face{width:25px;height:25px;object-fit:contain;flex:0 0 auto}.filter-all-icon{width:25px;text-align:center;color:var(--soft);font-weight:900}
+    .filters{display:grid;gap:5px;margin-top:8px}.filter{width:100%;display:flex;align-items:center;gap:9px;text-align:left;background:transparent;border:1px solid transparent;padding:7px 10px;color:var(--muted);cursor:pointer}.filter:hover,.filter.active{background:var(--panel2);border-color:var(--line);color:var(--text)}.difficulty-face{width:25px;height:25px;object-fit:contain;flex:0 0 auto}
     .side-actions{margin-top:auto;border-top:1px solid var(--line);padding:12px;display:grid;gap:6px}.btn{border:1px solid var(--line2);background:var(--panel2);padding:8px 11px;cursor:pointer;border-radius:0;font-weight:700;font-size:12px}.btn:hover{background:#202326;border-color:#646b71}.btn.primary{background:var(--text);color:#111;border-color:var(--text)}.btn.danger{color:#f3a0a4}.btn.ghost{background:transparent}.btn:disabled{opacity:.45;cursor:not-allowed}
-    .main{margin-left:var(--sidebar);min-height:100vh}.topbar{height:58px;position:sticky;top:0;background:rgba(12,13,14,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:8;display:flex;align-items:stretch;padding:0 28px}.tabs{display:flex}.tab{border:0;border-bottom:2px solid transparent;background:transparent;color:var(--muted);padding:0 20px;text-transform:uppercase;letter-spacing:.12em;font-size:11px;font-weight:850;cursor:pointer}.tab:hover{color:var(--text)}.tab.active{color:var(--text);border-bottom-color:var(--text)}.top-actions{margin-left:auto;display:flex;align-items:center}
+    .main{margin-left:var(--sidebar);min-height:100vh}.topbar{height:58px;position:sticky;top:0;background:rgba(12,13,14,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:8;display:flex;align-items:stretch;padding:0 28px}.tabs{display:flex}.tab{border:0;border-bottom:2px solid transparent;background:transparent;color:var(--muted);padding:0 20px;text-transform:uppercase;letter-spacing:.12em;font-size:11px;font-weight:850;cursor:pointer}.tab:hover{color:var(--text)}.tab.active{color:var(--text);border-bottom-color:var(--text)}.top-actions{margin-left:auto;display:flex;align-items:center;gap:7px}
     .content{max-width:1200px;margin:auto;padding:34px 30px 80px}.page{display:none}.page.active{display:block}.page-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:20px}.title{margin:0;font-size:27px;letter-spacing:-.04em}.sub{margin:5px 0 0;color:var(--muted);font-size:12px}.head-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
     .list{border-top:1px solid var(--line)}.level,.player{border:1px solid var(--line);border-top:0;background:var(--panel)}.level.open,.player.open{border-color:var(--line2)}
     .row{min-height:72px;display:grid;grid-template-columns:70px minmax(0,1fr) auto;align-items:stretch;cursor:pointer}.row:hover{background:var(--panel2)}.rank{display:grid;place-items:center;border-right:1px solid var(--line);font-size:20px;font-weight:900;font-variant-numeric:tabular-nums}.rank small{font-size:8px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-top:-16px}
@@ -39,18 +39,16 @@
       <div id="level-filters">
         <p class="eyebrow" style="margin-top:22px">Dificultad</p>
         <div class="filters">
-          <button class="filter active" data-filter=""><span class="filter-all-icon">#</span>Todas</button>
           <button class="filter" data-filter="Extreme Demon"><img class="difficulty-face" alt="" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Extreme_Demon_Icon.webp">Extreme Demon</button>
           <button class="filter" data-filter="Insane Demon"><img class="difficulty-face" alt="" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Insane_Demon_Icon.webp">Insane Demon</button>
-          <button class="filter" data-filter="Hard Demon"><img class="difficulty-face" alt="" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Hard_Demon_Icon.webp">Hard Demon</button>
-          <button class="filter" data-filter="Medium Demon"><img class="difficulty-face" alt="" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Medium_Demon_Icon.webp">Medium Demon</button>
+          <button class="filter" data-filter="Hard Demon"><img class="difficulty-face" alt="" src="https://geometrydash.wiki.gg/wiki/Special:Redirect/file/Demon.png">Hard Demon</button>
+          <button class="filter" data-filter="Medium Demon"><img class="difficulty-face" alt="" src="https://geometrydash.wiki.gg/wiki/Special:Redirect/file/MediumDemon.png">Medium Demon</button>
           <button class="filter" data-filter="Easy Demon"><img class="difficulty-face" alt="" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Easy_Demon_Icon.webp">Easy Demon</button>
           <button class="filter" data-filter="Insane"><img class="difficulty-face" alt="" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Insane_Icon.svg">Insane</button>
         </div>
       </div>
     </div>
     <div class="side-actions">
-      <button class="btn primary" id="login-btn">Iniciar sesión</button>
       <button class="btn hidden" id="logout-btn">Cerrar sesión</button>
       <button class="btn primary admin-only hidden" id="sync-btn">Guardar lista en Firebase</button>
       <button class="btn admin-only hidden" id="import-btn">Importar datos</button>
@@ -65,7 +63,7 @@
         <button class="tab active" data-page="levels">Lista</button>
         <button class="tab" data-page="players">Jugadores</button>
       </nav>
-      <div class="top-actions"><button class="btn primary" id="register-btn">Registrarte</button></div>
+      <div class="top-actions"><button type="button" class="btn" id="login-btn">Iniciar sesión</button><button type="button" class="btn primary" id="register-btn">Registrarte</button></div>
     </header>
 
     <div class="content">
@@ -289,7 +287,7 @@
     function confirm(title,message,action){$("#confirm-title").textContent=title;$("#confirm-message").textContent=message;pendingConfirm=action;$("#confirm-dialog").showModal()}
     document.addEventListener("click",e=>{
       const tab=e.target.closest(".tab");if(tab)return switchPage(tab.dataset.page);
-      const lf=e.target.closest(".filter");if(lf){difficulty=lf.dataset.filter;$$(".filter").forEach(b=>b.classList.toggle("active",b===lf));return render()}
+      const lf=e.target.closest(".filter");if(lf){const deselect=difficulty===lf.dataset.filter;difficulty=deselect?"":lf.dataset.filter;$$(".filter").forEach(b=>b.classList.toggle("active",!deselect&&b===lf));return render()}
       const level=e.target.closest("[data-level]"), act=e.target.closest("[data-action]");
       if(level){const id=level.dataset.level;if(act){e.stopPropagation();const i=state.levels.findIndex(x=>x.uid===id);if(act.dataset.action==="edit")return openLevel(id);if(act.dataset.action==="delete")return confirm("Eliminar nivel",`¿Eliminar “${state.levels[i].name}”?`,()=>{state.levels.splice(i,1);openLevels.delete(id);save("Nivel eliminado")});if(act.dataset.action==="up"&&i>0){[state.levels[i-1],state.levels[i]]=[state.levels[i],state.levels[i-1]];return save("Nivel movido")};if(act.dataset.action==="down"&&i<state.levels.length-1){[state.levels[i+1],state.levels[i]]=[state.levels[i],state.levels[i+1]];return save("Nivel movido")}}openLevels.has(id)?openLevels.delete(id):openLevels.add(id);return render()}
       const player=e.target.closest("[data-player]"), pa=e.target.closest("[data-player-action]");
@@ -317,7 +315,23 @@
       updateAuthUI();
       render();
     });
-    async function openGoogleAuth(){try{await signInWithPopup(auth,new GoogleAuthProvider())}catch(err){console.error(err);toast("No se pudo iniciar sesión. Revisá Authentication")}}
+    const googleProvider = new GoogleAuthProvider();
+    googleProvider.setCustomParameters({prompt:"select_account"});
+    async function openGoogleAuth(){
+      try{
+        await signInWithPopup(auth,googleProvider);
+      }catch(err){
+        console.error(err);
+        const messages={
+          "auth/unauthorized-domain":"Falta autorizar este dominio en Firebase",
+          "auth/popup-blocked":"El navegador bloqueó la ventana de inicio de sesión",
+          "auth/popup-closed-by-user":"Se cerró la ventana antes de iniciar sesión",
+          "auth/cancelled-popup-request":"Ya hay una ventana de inicio de sesión abierta",
+          "auth/operation-not-allowed":"Activá Google como proveedor en Firebase"
+        };
+        toast(messages[err?.code]||"No se pudo iniciar sesión con Google");
+      }
+    }
     $("#login-btn").onclick=openGoogleAuth;
     $("#register-btn").onclick=openGoogleAuth;
     $("#logout-btn").onclick=()=>signOut(auth);
