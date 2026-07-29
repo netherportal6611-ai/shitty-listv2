@@ -11,11 +11,11 @@
     :focus-visible{outline:2px solid #fff;outline-offset:2px}
     .sidebar{position:fixed;inset:0 auto 0 0;width:var(--sidebar);background:#101213;border-right:1px solid var(--line);z-index:10;display:flex;flex-direction:column}
     .brand{height:58px;display:flex;align-items:center;gap:10px;padding:0 18px;border-bottom:1px solid var(--line);font-weight:850;letter-spacing:.08em;text-transform:uppercase}.mark{width:20px;height:20px;border:2px solid var(--text);display:grid;place-items:center;font-size:9px}.brand span{color:var(--muted)}
-    .side-inner{padding:18px}.eyebrow{color:var(--muted);font-size:10px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;margin:0 0 8px}.side-copy{font-size:12px;color:var(--soft);margin:0 0 22px}
+    .side-inner{padding:18px}.eyebrow{color:var(--muted);font-size:10px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;margin:0 0 8px}
     .search{width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:0;color:var(--text);padding:10px 11px}.search::placeholder{color:#6f777d}
-    .filters{display:grid;gap:5px;margin-top:8px}.filter{width:100%;text-align:left;background:transparent;border:1px solid transparent;padding:8px 10px;color:var(--muted);cursor:pointer}.filter:hover,.filter.active{background:var(--panel2);border-color:var(--line);color:var(--text)}
-    .side-actions{margin-top:auto;border-top:1px solid var(--line);padding:12px;display:grid;gap:6px}.auth-box{border:1px solid var(--line);background:#0d0f10;padding:10px;margin-bottom:5px}.auth-name{font-size:11px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.auth-state{font-size:9px;color:var(--muted);margin-top:2px;text-transform:uppercase;letter-spacing:.07em}.uid{font:9px ui-monospace,monospace;color:var(--muted);overflow-wrap:anywhere;margin-top:7px}.btn{border:1px solid var(--line2);background:var(--panel2);padding:8px 11px;cursor:pointer;border-radius:0;font-weight:700;font-size:12px}.btn:hover{background:#202326;border-color:#646b71}.btn.primary{background:var(--text);color:#111;border-color:var(--text)}.btn.danger{color:#f3a0a4}.btn.ghost{background:transparent}.btn:disabled{opacity:.45;cursor:not-allowed}
-    .main{margin-left:var(--sidebar);min-height:100vh}.topbar{height:58px;position:sticky;top:0;background:rgba(12,13,14,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:8;display:flex;align-items:stretch;padding:0 28px}.tabs{display:flex}.tab{border:0;border-bottom:2px solid transparent;background:transparent;color:var(--muted);padding:0 20px;text-transform:uppercase;letter-spacing:.12em;font-size:11px;font-weight:850;cursor:pointer}.tab:hover{color:var(--text)}.tab.active{color:var(--text);border-bottom-color:var(--text)}.local-pill{margin-left:auto;align-self:center;border:1px solid var(--line);padding:5px 8px;color:var(--muted);font:10px ui-monospace,monospace;text-transform:uppercase;letter-spacing:.08em}
+    .filters{display:grid;gap:5px;margin-top:8px}.filter{width:100%;display:flex;align-items:center;gap:9px;text-align:left;background:transparent;border:1px solid transparent;padding:7px 10px;color:var(--muted);cursor:pointer}.filter:hover,.filter.active{background:var(--panel2);border-color:var(--line);color:var(--text)}.difficulty-face{width:25px;height:25px;object-fit:contain;flex:0 0 auto}.filter-all-icon{width:25px;text-align:center;color:var(--soft);font-weight:900}
+    .side-actions{margin-top:auto;border-top:1px solid var(--line);padding:12px;display:grid;gap:6px}.btn{border:1px solid var(--line2);background:var(--panel2);padding:8px 11px;cursor:pointer;border-radius:0;font-weight:700;font-size:12px}.btn:hover{background:#202326;border-color:#646b71}.btn.primary{background:var(--text);color:#111;border-color:var(--text)}.btn.danger{color:#f3a0a4}.btn.ghost{background:transparent}.btn:disabled{opacity:.45;cursor:not-allowed}
+    .main{margin-left:var(--sidebar);min-height:100vh}.topbar{height:58px;position:sticky;top:0;background:rgba(12,13,14,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:8;display:flex;align-items:stretch;padding:0 28px}.tabs{display:flex}.tab{border:0;border-bottom:2px solid transparent;background:transparent;color:var(--muted);padding:0 20px;text-transform:uppercase;letter-spacing:.12em;font-size:11px;font-weight:850;cursor:pointer}.tab:hover{color:var(--text)}.tab.active{color:var(--text);border-bottom-color:var(--text)}.top-actions{margin-left:auto;display:flex;align-items:center}
     .content{max-width:1200px;margin:auto;padding:34px 30px 80px}.page{display:none}.page.active{display:block}.page-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:20px}.title{margin:0;font-size:27px;letter-spacing:-.04em}.sub{margin:5px 0 0;color:var(--muted);font-size:12px}.head-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
     .list{border-top:1px solid var(--line)}.level,.player{border:1px solid var(--line);border-top:0;background:var(--panel)}.level.open,.player.open{border-color:var(--line2)}
     .row{min-height:72px;display:grid;grid-template-columns:70px minmax(0,1fr) auto;align-items:stretch;cursor:pointer}.row:hover{background:var(--panel2)}.rank{display:grid;place-items:center;border-right:1px solid var(--line);font-size:20px;font-weight:900;font-variant-numeric:tabular-nums}.rank small{font-size:8px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-top:-16px}
@@ -34,32 +34,25 @@
   <aside class="sidebar">
     <div class="brand"><div class="mark">SL</div>Slate <span>List</span></div>
     <div class="side-inner">
-      <p class="eyebrow">Lista comunitaria</p>
-      <p class="side-copy">Una lista limpia, local e independiente para tus niveles de Geometry Dash.</p>
       <label class="eyebrow" for="search">Buscar</label>
       <input class="search" id="search" placeholder="Nivel o jugador…" autocomplete="off">
       <div id="level-filters">
         <p class="eyebrow" style="margin-top:22px">Dificultad</p>
         <div class="filters">
-          <button class="filter active" data-filter="">Todas</button>
-          <button class="filter" data-filter="Extreme Demon">Extreme Demon</button>
-          <button class="filter" data-filter="Insane Demon">Insane Demon</button>
-          <button class="filter" data-filter="Hard Demon">Hard Demon</button>
-          <button class="filter" data-filter="Medium Demon">Medium Demon</button>
-          <button class="filter" data-filter="Easy Demon">Easy Demon</button>
+          <button class="filter active" data-filter=""><span class="filter-all-icon">#</span>Todas</button>
+          <button class="filter" data-filter="Extreme Demon"><img class="difficulty-face" alt="" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Extreme_Demon_Icon.webp">Extreme Demon</button>
+          <button class="filter" data-filter="Insane Demon"><img class="difficulty-face" alt="" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Insane_Demon_Icon.webp">Insane Demon</button>
+          <button class="filter" data-filter="Hard Demon"><img class="difficulty-face" alt="" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Hard_Demon_Icon.webp">Hard Demon</button>
+          <button class="filter" data-filter="Medium Demon"><img class="difficulty-face" alt="" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Medium_Demon_Icon.webp">Medium Demon</button>
+          <button class="filter" data-filter="Easy Demon"><img class="difficulty-face" alt="" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Easy_Demon_Icon.webp">Easy Demon</button>
+          <button class="filter" data-filter="Insane"><img class="difficulty-face" alt="" src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Insane_Icon.svg">Insane</button>
         </div>
       </div>
     </div>
     <div class="side-actions">
-      <div class="auth-box">
-        <div class="auth-name" id="auth-name">Visitante</div>
-        <div class="auth-state" id="auth-state">Solo lectura</div>
-        <div class="uid hidden" id="auth-uid"></div>
-      </div>
-      <button class="btn primary" id="login-btn">Entrar con Google</button>
+      <button class="btn primary" id="login-btn">Iniciar sesión</button>
       <button class="btn hidden" id="logout-btn">Cerrar sesión</button>
       <button class="btn primary admin-only hidden" id="sync-btn">Guardar lista en Firebase</button>
-      <button class="btn" id="export-btn">Exportar datos</button>
       <button class="btn admin-only hidden" id="import-btn">Importar datos</button>
       <input class="hidden" type="file" id="import-file" accept=".json,application/json">
       <button class="btn ghost danger admin-only hidden" id="reset-btn">Restablecer ejemplo</button>
@@ -72,7 +65,7 @@
         <button class="tab active" data-page="levels">Lista</button>
         <button class="tab" data-page="players">Jugadores</button>
       </nav>
-      <div class="local-pill" id="cloud-state">○ conectando</div>
+      <div class="top-actions"><button class="btn primary" id="register-btn">Registrarte</button></div>
     </header>
 
     <div class="content">
@@ -101,7 +94,7 @@
         <div class="form-grid">
           <div class="field full"><label for="level-name">Nombre</label><input id="level-name" required maxlength="80"></div>
           <div class="field"><label for="level-id">ID de Geometry Dash</label><input id="level-id" inputmode="numeric" maxlength="20"></div>
-          <div class="field"><label for="level-diff">Dificultad</label><select id="level-diff"><option>Extreme Demon</option><option>Insane Demon</option><option>Hard Demon</option><option>Medium Demon</option><option>Easy Demon</option><option>Sin asignar</option></select></div>
+          <div class="field"><label for="level-diff">Dificultad</label><select id="level-diff"><option>Extreme Demon</option><option>Insane Demon</option><option>Hard Demon</option><option>Medium Demon</option><option>Easy Demon</option><option>Insane</option><option>Sin asignar</option></select></div>
           <div class="field"><label for="level-creator">Creador</label><input id="level-creator" maxlength="40"></div>
           <div class="field"><label for="level-verifier">Verificador</label><input id="level-verifier" maxlength="40" list="players-datalist"></div>
           <div class="field"><label for="level-atts">Intentos</label><input id="level-atts" inputmode="numeric" maxlength="12"></div>
@@ -189,7 +182,8 @@
       ]
     };
     let state = load(), page = "levels", query = "", difficulty = "", openLevels = new Set(), openPlayers = new Set(), pendingConfirm = null;
-    let currentUser = null, isAdmin = false, cloudReady = false, stopAdminListener = null;
+    const ADMIN_EMAIL = "netherportal6611@gmail.com";
+    let currentUser = null, isAdmin = false;
     const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
     const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
     const clone = o => JSON.parse(JSON.stringify(o));
@@ -306,41 +300,30 @@
     function updateAuthUI(){
       $("#login-btn").classList.toggle("hidden",!!currentUser);
       $("#logout-btn").classList.toggle("hidden",!currentUser);
+      $("#register-btn").classList.toggle("hidden",!!currentUser);
       $$(".admin-only").forEach(e=>e.classList.toggle("hidden",!isAdmin));
-      $("#auth-name").textContent=currentUser?(currentUser.displayName||currentUser.email||"Usuario"):"Visitante";
-      $("#auth-state").textContent=isAdmin?"Administrador":currentUser?"Sin permisos de edición":"Solo lectura";
-      $("#auth-uid").classList.toggle("hidden",!currentUser||isAdmin);
-      $("#auth-uid").textContent=currentUser&&!isAdmin?`UID: ${currentUser.uid}`:"";
-    }
-    function setCloudState(text,online){
-      $("#cloud-state").textContent=`${online?"●":"○"} ${text}`;
     }
     onValue(ref(database,"slateList"),snapshot=>{
-      cloudReady=true;setCloudState("Firebase conectado",true);
       if(snapshot.exists()){
         const remote=snapshot.val();
         if(remote&&Array.isArray(remote.levels)&&Array.isArray(remote.players)){
           state=remote;localStorage.setItem(KEY,JSON.stringify(state));render();
         }
       }
-    },error=>{console.error(error);cloudReady=false;setCloudState("modo local",false);toast("Firebase no permite leer todavía")});
+    },error=>{console.error(error);toast("Firebase no permite leer todavía")});
     onAuthStateChanged(auth,user=>{
-      currentUser=user;isAdmin=false;
-      if(stopAdminListener){stopAdminListener();stopAdminListener=null}
-      if(user){
-        stopAdminListener=onValue(ref(database,`admins/${user.uid}`),snapshot=>{
-          isAdmin=snapshot.val()===true;updateAuthUI();render();
-          if(!isAdmin)toast("Copiá tu UID y agregalo en Firebase para ser administrador");
-        },error=>{console.error(error);isAdmin=false;updateAuthUI();render()});
-      }else{updateAuthUI();render()}
+      currentUser=user;
+      isAdmin=String(user?.email||"").toLowerCase()===ADMIN_EMAIL;
+      updateAuthUI();
+      render();
     });
-    $("#login-btn").onclick=async()=>{try{await signInWithPopup(auth,new GoogleAuthProvider())}catch(err){console.error(err);toast("No se pudo iniciar sesión. Revisá Authentication")}};
+    async function openGoogleAuth(){try{await signInWithPopup(auth,new GoogleAuthProvider())}catch(err){console.error(err);toast("No se pudo iniciar sesión. Revisá Authentication")}}
+    $("#login-btn").onclick=openGoogleAuth;
+    $("#register-btn").onclick=openGoogleAuth;
     $("#logout-btn").onclick=()=>signOut(auth);
     $("#sync-btn").onclick=()=>save("Lista guardada en Firebase");
-    $("#auth-uid").onclick=async()=>{if(!currentUser)return;try{await navigator.clipboard.writeText(currentUser.uid);toast("UID copiado")}catch(e){toast(currentUser.uid)}};
     $("#search").addEventListener("input",e=>{query=e.target.value;render()});$("#add-level").onclick=()=>openLevel();$("#add-player").onclick=()=>openPlayer();$("#add-completion").onclick=()=>addCompletionField();$("#level-form").addEventListener("submit",submitLevel);$("#player-form").addEventListener("submit",submitPlayer);
     $("#confirm-dialog").addEventListener("close",()=>{if($("#confirm-dialog").returnValue==="default"&&pendingConfirm)pendingConfirm();pendingConfirm=null});
-    $("#export-btn").onclick=()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`slate-list-backup-${new Date().toISOString().slice(0,10)}.json`;a.click();URL.revokeObjectURL(a.href);toast("Copia exportada")};
     $("#import-btn").onclick=()=>$("#import-file").click();$("#import-file").onchange=async e=>{try{const x=JSON.parse(await e.target.files[0].text());if(!Array.isArray(x.levels)||!Array.isArray(x.players))throw 0;state=x;save("Datos importados")}catch(err){toast("El archivo no es válido")}e.target.value=""};
     $("#reset-btn").onclick=()=>confirm("Restablecer datos","Se reemplazarán los datos locales por el ejemplo inicial.",()=>{state=clone(seed);openLevels.clear();openPlayers.clear();save("Datos restablecidos")});
     render();
