@@ -56,6 +56,7 @@
     dialog{border-radius:16px;background:linear-gradient(155deg,#171c22,#0f1317);border-color:#3a444f}.dlg-head{padding:19px 21px}.dlg-body{padding:23px}.dlg-actions{padding:15px 21px}.field input,.field select,.field textarea{min-height:42px;border-radius:9px;background:#0b0e12}.field textarea{min-height:92px}.image-picker{border-radius:12px;background:linear-gradient(135deg,#13181e,#0d1115)}
     .account-button{border-radius:10px;padding:6px 11px 6px 6px}.account-avatar{width:31px;height:31px;overflow:hidden}.account-avatar img{width:100%;height:100%;object-fit:cover}.account-popover{border-radius:12px;padding:14px}.toast{border-radius:10px;padding:13px 16px}
     #level-dialog{width:min(820px,calc(100vw - 24px));max-height:calc(100dvh - 28px);overflow:hidden}#level-form{display:flex;flex-direction:column;max-height:calc(100dvh - 30px)}#level-form .dlg-head{flex:0 0 auto;padding:16px 19px}#level-form .dlg-body{flex:1 1 auto;min-height:0;overflow-y:auto;padding:18px;scrollbar-width:thin;scrollbar-color:#4a5561 #11151a}#level-form .dlg-actions{position:relative;z-index:2;flex:0 0 auto;padding:13px 18px;background:#14191f;box-shadow:0 -12px 28px rgba(0,0,0,.24)}#level-form .dlg-actions .primary{min-width:150px}.dialog-title-wrap h2{margin:0}.dialog-kicker{margin-top:3px;color:var(--muted);font-size:10px}.form-section{padding:16px;border:1px solid var(--line);border-radius:11px;background:#101419}.form-section+.form-section{margin-top:11px}.form-section-title{display:flex;align-items:center;gap:9px;margin:0 0 13px;color:var(--soft);font-size:9px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.form-section-title span{width:22px;height:22px;display:grid;place-items:center;border:1px solid var(--line2);border-radius:6px;background:#171c22;color:#fff;font-size:10px;letter-spacing:0}.form-section .form-grid{gap:12px}.form-section .field textarea{min-height:76px}.media-layout{display:grid;grid-template-columns:1fr 1.25fr;gap:12px}.media-layout .image-picker{height:100%;min-height:128px;grid-template-columns:96px minmax(0,1fr)}.media-layout .image-preview-wrap{width:96px;height:76px}.completion-zone{padding:14px;border:1px dashed var(--line2);border-radius:9px;background:#0d1115}.completion-zone #completion-fields:empty{display:none}.completion-zone .hint{margin-bottom:0}
+    #profile-dialog{max-height:calc(100dvh - 28px);overflow:hidden}#profile-form{display:flex;flex-direction:column;max-height:calc(100dvh - 30px)}#profile-form .dlg-body{overflow-y:auto;min-height:0}.shape-options{display:grid;grid-template-columns:1fr 1fr;gap:7px}.shape-option{position:relative}.shape-option input{position:absolute;opacity:0;pointer-events:none}.shape-option span{height:40px;display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);border-radius:8px;background:#0c0f13;color:var(--muted);font-size:11px;font-weight:800;cursor:pointer}.shape-option input:checked+span{border-color:#fff;color:#fff;background:#1c2229;box-shadow:0 0 0 2px rgba(255,255,255,.055)}.shape-sample{width:17px;height:17px;border:2px solid currentColor}.shape-sample.circle{border-radius:50%}.profile-avatar-cluster{display:flex;align-items:flex-end;gap:12px}.profile-cube{width:56px;height:56px;object-fit:cover;border:1px solid var(--line2);border-radius:8px;background:#151a20;box-shadow:0 7px 18px rgba(0,0,0,.3)}.profile-cube.empty-cube{display:grid;place-items:center;color:var(--muted);font-size:10px;text-align:center}.avatar-square{border-radius:10px!important}.cube-picker .image-preview-wrap{width:72px;height:72px;border-radius:8px}.cube-picker .image-preview{border-radius:0}.cube-picker{grid-template-columns:72px minmax(0,1fr)}
     .level-fallback{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;gap:10px;overflow:hidden;background:linear-gradient(135deg,#181d23,#0d1014)}.level-fallback::before{content:"";position:absolute;inset:-40%;opacity:.17;filter:blur(28px);background:var(--fallback,#7d8792)}.level-fallback img{position:relative;width:44px;height:44px;object-fit:contain;filter:drop-shadow(0 8px 10px rgba(0,0,0,.45))}.level-fallback b{position:relative;max-width:125px;font-size:11px;line-height:1.2;text-shadow:0 2px 8px #000}
     .podium{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;align-items:end;margin:4px 0 20px}.podium-card{position:relative;min-height:126px;padding:19px 15px 15px;border:1px solid var(--line);border-radius:13px;background:linear-gradient(145deg,rgba(255,255,255,.045),transparent 55%),var(--panel);text-align:center;cursor:pointer;overflow:hidden}.podium-card:hover{transform:translateY(-2px);border-color:var(--line2)}.podium-card.first{min-height:148px;border-color:rgba(243,211,106,.45);order:2}.podium-card.second{border-color:rgba(201,208,216,.38);order:1}.podium-card.third{border-color:rgba(214,146,97,.4);order:3}.podium-place{font-size:27px;font-weight:950}.podium-card.first .podium-place{color:#f3d36a}.podium-card.second .podium-place{color:#c9d0d8}.podium-card.third .podium-place{color:#d69261}.podium-name{font-weight:900;font-size:14px;margin-top:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.podium-score{font-size:10px;color:var(--muted);margin-top:4px}
     .user-metrics{display:flex;gap:8px;flex-wrap:wrap;margin-top:7px}.user-metric{font-size:9px;color:var(--soft);padding:2px 6px;border:1px solid var(--line);border-radius:5px;background:rgba(0,0,0,.12)}.user-date{margin-left:auto;align-self:center;font-size:9px;color:var(--muted);white-space:nowrap}
@@ -231,6 +232,8 @@
         <div class="form-grid">
           <div class="field full"><label for="profile-name">Nombre</label><input id="profile-name" required maxlength="40"></div>
           <div class="field full"><label>Foto de perfil</label><div class="image-picker" id="profile-image-picker"><div class="image-preview-wrap"><img class="image-preview avatar-preview" id="profile-photo-preview" alt=""><span class="image-placeholder">●</span></div><div class="image-picker-copy"><div class="image-picker-title">Tu avatar</div><div class="image-picker-help">Arrastrá una foto acá o elegila desde tu dispositivo.</div><div class="image-picker-actions"><label class="btn upload-button" for="profile-photo-file">↑ Elegir foto</label><button type="button" class="btn ghost danger remove-image" data-clear-image="profile">Quitar</button></div><input id="profile-photo-file" type="file" accept="image/png,image/jpeg,image/webp,image/gif"></div></div></div>
+          <div class="field full"><label>Forma de la foto</label><div class="shape-options"><label class="shape-option"><input type="radio" name="profile-shape" value="circle" checked><span><i class="shape-sample circle"></i>Circular</span></label><label class="shape-option"><input type="radio" name="profile-shape" value="square"><span><i class="shape-sample"></i>Cuadrada</span></label></div></div>
+          <div class="field full"><label>Cubo de Geometry Dash</label><div class="image-picker cube-picker" id="cube-image-picker"><div class="image-preview-wrap"><img class="image-preview" id="cube-image-preview" alt=""><span class="image-placeholder">▦</span></div><div class="image-picker-copy"><div class="image-picker-title">Tu cubo</div><div class="image-picker-help">Subí una imagen cuadrada para mostrar junto a tu avatar.</div><div class="image-picker-actions"><label class="btn upload-button" for="cube-image-file">↑ Elegir cubo</label><button type="button" class="btn ghost danger remove-image" data-clear-image="cube">Quitar</button></div><input id="cube-image-file" type="file" accept="image/png,image/jpeg,image/webp,image/gif"></div></div></div>
           <div class="field full"><label for="profile-bio">Descripción</label><textarea id="profile-bio" maxlength="300" placeholder="Contá algo sobre vos..."></textarea></div>
         </div>
       </div>
@@ -269,7 +272,7 @@
     const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
     const clone = o => JSON.parse(JSON.stringify(o));
     let state = load(), page = "levels", query = "", difficulty = "", openLevels = new Set(), openPlayers = new Set(), pendingConfirm = null;
-    let profiles = {}, playerView = "ranking", viewedProfileUid = null, editingLevelImage = "", editingProfileImage = "";
+    let profiles = {}, playerView = "ranking", viewedProfileUid = null, editingLevelImage = "", editingProfileImage = "", editingCubeImage = "";
     const ADMIN_EMAIL = "netherportal6611@gmail.com";
     let currentUser = null, isAdmin = false;
     function load(){localStorage.removeItem(KEY);return clone(seed)}
@@ -414,7 +417,8 @@
     }
     function avatarHTML(p,cls="user-avatar"){
       const name=p?.name||"Usuario", initial=esc(name.charAt(0).toUpperCase()||"U");
-      return p?.photoURL?`<img class="${cls}" src="${esc(p.photoURL)}" alt="Foto de ${esc(name)}" referrerpolicy="no-referrer">`:`<div class="${cls} avatar-fallback">${initial}</div>`;
+      const shape=p?.photoShape==="square"?" avatar-square":"";
+      return p?.photoURL?`<img class="${cls}${shape}" src="${esc(p.photoURL)}" alt="Foto de ${esc(name)}" referrerpolicy="no-referrer">`:`<div class="${cls} avatar-fallback${shape}">${initial}</div>`;
     }
     function formatDate(value){
       if(!value)return "Sin fecha";
@@ -452,7 +456,7 @@
       const recent=[...activity.verified.map(l=>({...l,action:"Verificó"})),...activity.victors.map(l=>({...l,action:"Completó"}))].slice(0,4);
       $("#profile-subtitle").textContent=isOwn?"Tu identidad en Slate List":"Perfil público";
       $("#profile-content").innerHTML=`<div class="profile-shell">
-        <div class="profile-hero">${avatarHTML(p,"profile-avatar")}<div class="profile-main"><div class="profile-name">${esc(p.name||"Usuario")}</div><div class="profile-bio">${esc(p.bio||"Sin descripción todavía.")}</div></div>${isOwn?'<button class="btn primary" data-edit-profile>Editar perfil</button>':""}</div>
+        <div class="profile-hero"><div class="profile-avatar-cluster">${avatarHTML(p,"profile-avatar")}${p.cubeURL?`<img class="profile-cube" src="${esc(p.cubeURL)}" alt="Cubo de ${esc(p.name||"Usuario")}">`:'<div class="profile-cube empty-cube">Sin cubo</div>'}</div><div class="profile-main"><div class="profile-name">${esc(p.name||"Usuario")}</div><div class="profile-bio">${esc(p.bio||"Sin descripción todavía.")}</div></div>${isOwn?'<button class="btn primary" data-edit-profile>Editar perfil</button>':""}</div>
         <div class="profile-stats"><div class="profile-stat"><strong>${activity.victors.length}</strong><span>Victors</span></div><div class="profile-stat"><strong>${activity.verified.length}</strong><span>Verificaciones</span></div><div class="profile-stat"><strong>${activity.levels.length}</strong><span>Niveles</span></div></div>
         <div class="profile-insights"><div class="insight"><div class="insight-label">Nivel más difícil</div><div class="insight-value">${hardest?`#${hardest.rank} · ${esc(hardest.name)}`:"Sin registros"}</div></div><div class="insight"><div class="insight-label">Puesto promedio</div><div class="insight-value">${average?`Top ${average}`:"—"}</div></div><div class="insight"><div class="insight-label">En la comunidad desde</div><div class="insight-value">${esc(formatDate(p.createdAt))}</div></div></div>
         <div class="recent-activity"><h3>Actividad reciente</h3>${recent.length?recent.map(l=>`<div class="activity-row"><span class="activity-mark"></span><b>${esc(l.action)}</b><span>${esc(l.name)}</span><span>Top ${l.rank}</span></div>`).join(""):'<div class="empty-copy">Todavía no hay actividad para mostrar.</div>'}</div>
@@ -468,6 +472,13 @@
       $("#profile-photo-file").value="";
       $("#profile-photo-preview").src=editingProfileImage||"";
       $("#profile-image-picker").classList.toggle("has-image",!!editingProfileImage);
+      const shape=p.photoShape==="square"?"square":"circle";
+      $$('input[name="profile-shape"]').forEach(input=>input.checked=input.value===shape);
+      $("#profile-photo-preview").classList.toggle("avatar-square",shape==="square");
+      editingCubeImage=p.cubeURL||"";
+      $("#cube-image-file").value="";
+      $("#cube-image-preview").src=editingCubeImage||"";
+      $("#cube-image-picker").classList.toggle("has-image",!!editingCubeImage);
       $("#profile-bio").value=p.bio||"";
       $("#profile-dialog").showModal();
     }
@@ -499,7 +510,10 @@
       try{
         const file=$("#profile-photo-file").files[0];
         const photoURL=file?await imageToDataURL(file,320,320,.82):editingProfileImage;
-        await update(ref(database,`profiles/${currentUser.uid}`),{name,photoURL,bio:$("#profile-bio").value.trim(),updatedAt:Date.now()});
+        const cubeFile=$("#cube-image-file").files[0];
+        const cubeURL=cubeFile?await imageToDataURL(cubeFile,180,180,.86):editingCubeImage;
+        const photoShape=$('input[name="profile-shape"]:checked')?.value||"circle";
+        await update(ref(database,`profiles/${currentUser.uid}`),{name,photoURL,photoShape,cubeURL,bio:$("#profile-bio").value.trim(),updatedAt:Date.now()});
         $("#profile-dialog").close();toast("Perfil actualizado");
       }catch(err){console.error(err);toast(err.message==="image-too-large"?"La imagen supera los 5 MB":"No se pudo procesar la imagen","error")}
     }
@@ -560,6 +574,7 @@
         $("#account-label").textContent=p.name||currentUser.displayName||label;
         $("#account-role").textContent=label;
         $("#account-email").textContent=currentUser.email||"";
+        $("#account-avatar").classList.toggle("avatar-square",p.photoShape==="square");
         $("#account-avatar").innerHTML=p.photoURL?`<img src="${esc(p.photoURL)}" alt="">`:esc((p.name||currentUser.displayName||currentUser.email||"A").charAt(0).toUpperCase());
       }
       $$(".admin-only").forEach(e=>e.classList.toggle("hidden",!isAdmin));
@@ -631,14 +646,18 @@
       picker.addEventListener("drop",e=>{const file=e.dataTransfer.files[0];if(!file)return;const transfer=new DataTransfer();transfer.items.add(file);input.files=transfer.files;previewSelected(input,preview)});
     }
     $("#profile-photo-file").addEventListener("change",e=>previewSelected(e.target,$("#profile-photo-preview")));
+    $("#cube-image-file").addEventListener("change",e=>previewSelected(e.target,$("#cube-image-preview")));
     $("#level-image-file").addEventListener("change",e=>previewSelected(e.target,$("#level-image-preview")));
     setupImageDrop($("#profile-image-picker"),$("#profile-photo-file"),$("#profile-photo-preview"));
+    setupImageDrop($("#cube-image-picker"),$("#cube-image-file"),$("#cube-image-preview"));
     setupImageDrop($("#level-image-picker"),$("#level-image-file"),$("#level-image-preview"));
+    $$('input[name="profile-shape"]').forEach(input=>input.addEventListener("change",()=>$("#profile-photo-preview").classList.toggle("avatar-square",input.value==="square"&&input.checked)));
     $$("[data-clear-image]").forEach(button=>button.onclick=()=>{
-      const profile=button.dataset.clearImage==="profile";
-      const input=$(profile?"#profile-photo-file":"#level-image-file"), preview=$(profile?"#profile-photo-preview":"#level-image-preview"), picker=$(profile?"#profile-image-picker":"#level-image-picker");
+      const type=button.dataset.clearImage;
+      const selectors={profile:["#profile-photo-file","#profile-photo-preview","#profile-image-picker"],cube:["#cube-image-file","#cube-image-preview","#cube-image-picker"],level:["#level-image-file","#level-image-preview","#level-image-picker"]}[type];
+      const input=$(selectors[0]),preview=$(selectors[1]),picker=$(selectors[2]);
       input.value="";preview.removeAttribute("src");picker.classList.remove("has-image");
-      if(profile)editingProfileImage="";else editingLevelImage="";
+      if(type==="profile")editingProfileImage="";else if(type==="cube")editingCubeImage="";else editingLevelImage="";
     });
     $("#search").addEventListener("input",e=>{query=e.target.value;render()});$("#add-level").onclick=()=>openLevel();$("#add-player").onclick=()=>openPlayer();$("#add-completion").onclick=()=>addCompletionField();$("#level-form").addEventListener("submit",submitLevel);$("#player-form").addEventListener("submit",submitPlayer);$("#profile-form").addEventListener("submit",submitProfile);
     $("#confirm-dialog").addEventListener("close",()=>{if($("#confirm-dialog").returnValue==="default"&&pendingConfirm)pendingConfirm();pendingConfirm=null});
