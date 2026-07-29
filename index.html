@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Slate List</title>
+  <style>
+    :root{--bg:#0c0d0e;--panel:#131516;--panel2:#181a1c;--line:#303438;--line2:#454b50;--text:#f3f5f6;--muted:#8c969e;--soft:#b9c0c5;--accent:#dbe1e5;--danger:#df6c72;--ok:#78b98d;--warn:#d4b65d;--sidebar:230px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}button{color:inherit}
+    :focus-visible{outline:2px solid #fff;outline-offset:2px}
+    .sidebar{position:fixed;inset:0 auto 0 0;width:var(--sidebar);background:#101213;border-right:1px solid var(--line);z-index:10;display:flex;flex-direction:column}
+    .brand{height:58px;display:flex;align-items:center;gap:10px;padding:0 18px;border-bottom:1px solid var(--line);font-weight:850;letter-spacing:.08em;text-transform:uppercase}.mark{width:20px;height:20px;border:2px solid var(--text);display:grid;place-items:center;font-size:9px}.brand span{color:var(--muted)}
+    .side-inner{padding:18px}.eyebrow{color:var(--muted);font-size:10px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;margin:0 0 8px}.side-copy{font-size:12px;color:var(--soft);margin:0 0 22px}
+    .search{width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:0;color:var(--text);padding:10px 11px}.search::placeholder{color:#6f777d}
+    .filters{display:grid;gap:5px;margin-top:8px}.filter{width:100%;text-align:left;background:transparent;border:1px solid transparent;padding:8px 10px;color:var(--muted);cursor:pointer}.filter:hover,.filter.active{background:var(--panel2);border-color:var(--line);color:var(--text)}
+    .side-actions{margin-top:auto;border-top:1px solid var(--line);padding:12px;display:grid;gap:6px}.auth-box{border:1px solid var(--line);background:#0d0f10;padding:10px;margin-bottom:5px}.auth-name{font-size:11px;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.auth-state{font-size:9px;color:var(--muted);margin-top:2px;text-transform:uppercase;letter-spacing:.07em}.uid{font:9px ui-monospace,monospace;color:var(--muted);overflow-wrap:anywhere;margin-top:7px}.btn{border:1px solid var(--line2);background:var(--panel2);padding:8px 11px;cursor:pointer;border-radius:0;font-weight:700;font-size:12px}.btn:hover{background:#202326;border-color:#646b71}.btn.primary{background:var(--text);color:#111;border-color:var(--text)}.btn.danger{color:#f3a0a4}.btn.ghost{background:transparent}.btn:disabled{opacity:.45;cursor:not-allowed}
+    .main{margin-left:var(--sidebar);min-height:100vh}.topbar{height:58px;position:sticky;top:0;background:rgba(12,13,14,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:8;display:flex;align-items:stretch;padding:0 28px}.tabs{display:flex}.tab{border:0;border-bottom:2px solid transparent;background:transparent;color:var(--muted);padding:0 20px;text-transform:uppercase;letter-spacing:.12em;font-size:11px;font-weight:850;cursor:pointer}.tab:hover{color:var(--text)}.tab.active{color:var(--text);border-bottom-color:var(--text)}.local-pill{margin-left:auto;align-self:center;border:1px solid var(--line);padding:5px 8px;color:var(--muted);font:10px ui-monospace,monospace;text-transform:uppercase;letter-spacing:.08em}
+    .content{max-width:1200px;margin:auto;padding:34px 30px 80px}.page{display:none}.page.active{display:block}.page-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:20px}.title{margin:0;font-size:27px;letter-spacing:-.04em}.sub{margin:5px 0 0;color:var(--muted);font-size:12px}.head-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+    .list{border-top:1px solid var(--line)}.level,.player{border:1px solid var(--line);border-top:0;background:var(--panel)}.level.open,.player.open{border-color:var(--line2)}
+    .row{min-height:72px;display:grid;grid-template-columns:70px minmax(0,1fr) auto;align-items:stretch;cursor:pointer}.row:hover{background:var(--panel2)}.rank{display:grid;place-items:center;border-right:1px solid var(--line);font-size:20px;font-weight:900;font-variant-numeric:tabular-nums}.rank small{font-size:8px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-top:-16px}
+    .summary{padding:12px 16px;min-width:0;align-self:center}.name{font-weight:800;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:11px;margin-top:5px}.badge{border:1px solid var(--line2);padding:2px 6px;color:var(--soft);font-size:9px;text-transform:uppercase;letter-spacing:.06em;font-weight:850}.diff-extreme{color:#ef8589;border-color:#673b3e}.diff-insane{color:#e8a273;border-color:#64442e}.diff-hard{color:#e0c969;border-color:#5b522e}.diff-medium{color:#8fca91;border-color:#365338}.diff-easy{color:#8ec5df;border-color:#345064}
+    .row-tools{display:flex;align-items:center;gap:5px;padding:0 12px}.icon{width:31px;height:31px;display:grid;place-items:center;border:1px solid var(--line);background:#111314;cursor:pointer;color:var(--muted)}.icon:hover{color:var(--text);border-color:var(--line2)}.chev{transition:transform .18s}.open .chev{transform:rotate(180deg)}
+    .details{display:none;border-top:1px solid var(--line);padding:14px}.open>.details{display:block}.info{border:1px solid var(--line);background:#101213;padding:14px}.info-title{border-left:2px solid var(--muted);padding-left:8px;margin-bottom:12px;color:var(--muted);font-size:9px;letter-spacing:.14em;text-transform:uppercase;font-weight:850}.kv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px 28px}.k{color:var(--muted);font-size:9px;letter-spacing:.1em;text-transform:uppercase;font-weight:800}.v{font-weight:750;margin-top:3px;overflow-wrap:anywhere}.empty{color:#636b71;font-style:italic;font-weight:500}.link{color:var(--text)}
+    .player .row{grid-template-columns:70px minmax(0,1fr) auto;min-height:58px}.player .rank{font-size:17px}.completions{display:grid;gap:5px}.completion{display:grid;grid-template-columns:70px minmax(0,1fr) auto;gap:12px;align-items:center;padding:9px 10px;border:1px solid var(--line);background:var(--panel2);font-size:12px}.completion .pos{color:var(--muted);font-variant-numeric:tabular-nums}.completion .role{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.06em}.no-data{border:1px solid var(--line);padding:40px;text-align:center;color:var(--muted)}
+    dialog{width:min(560px,calc(100vw - 24px));border:1px solid var(--line2);background:#111314;color:var(--text);padding:0;box-shadow:0 20px 80px #000}dialog::backdrop{background:rgba(0,0,0,.76)}.dlg-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:15px 17px}.dlg-head h2{font-size:15px;margin:0}.dlg-body{padding:17px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:grid;gap:5px}.field.full{grid-column:1/-1}.field label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-weight:800}.field input,.field select,.field textarea{width:100%;background:#0d0f10;color:var(--text);border:1px solid var(--line);border-radius:0;padding:9px 10px}.field textarea{resize:vertical;min-height:70px}.dlg-actions{display:flex;justify-content:flex-end;gap:7px;padding:13px 17px;border-top:1px solid var(--line)}.hint{font-size:11px;color:var(--muted);margin:10px 0 0}.sep{height:1px;background:var(--line);margin:16px 0}
+    .toast{position:fixed;right:18px;bottom:18px;background:var(--text);color:#111;padding:10px 14px;font-weight:800;font-size:12px;transform:translateY(80px);opacity:0;transition:.2s;z-index:40}.toast.show{transform:none;opacity:1}
+    .mobile-menu{display:none}.hidden{display:none!important}
+    @media(max-width:820px){:root{--sidebar:0px}.sidebar{display:none}.main{margin-left:0}.topbar{padding:0 14px}.content{padding:24px 14px 60px}.mobile-menu{display:inline-flex}.local-pill{font-size:8px}.page-head{align-items:flex-start;flex-direction:column}.head-actions{justify-content:flex-start}.kv{grid-template-columns:1fr 1fr}.row{grid-template-columns:52px minmax(0,1fr) auto}.rank{font-size:16px}.row-tools{padding:0 7px}.row-tools .move{display:none}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.completion{grid-template-columns:52px minmax(0,1fr)}.completion .role{grid-column:2}}
+    @media(max-width:480px){.tab{padding:0 13px}.kv{grid-template-columns:1fr}.local-pill{display:none}.summary{padding:10px}.meta .optional{display:none}.icon{width:29px;height:29px}.content{padding-left:8px;padding-right:8px}}
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><div class="mark">SL</div>Slate <span>List</span></div>
+    <div class="side-inner">
+      <p class="eyebrow">Lista comunitaria</p>
+      <p class="side-copy">Una lista limpia, local e independiente para tus niveles de Geometry Dash.</p>
+      <label class="eyebrow" for="search">Buscar</label>
+      <input class="search" id="search" placeholder="Nivel o jugador…" autocomplete="off">
+      <div id="level-filters">
+        <p class="eyebrow" style="margin-top:22px">Dificultad</p>
+        <div class="filters">
+          <button class="filter active" data-filter="">Todas</button>
+          <button class="filter" data-filter="Extreme Demon">Extreme Demon</button>
+          <button class="filter" data-filter="Insane Demon">Insane Demon</button>
+          <button class="filter" data-filter="Hard Demon">Hard Demon</button>
+          <button class="filter" data-filter="Medium Demon">Medium Demon</button>
+          <button class="filter" data-filter="Easy Demon">Easy Demon</button>
+        </div>
+      </div>
+    </div>
+    <div class="side-actions">
+      <div class="auth-box">
+        <div class="auth-name" id="auth-name">Visitante</div>
+        <div class="auth-state" id="auth-state">Solo lectura</div>
+        <div class="uid hidden" id="auth-uid"></div>
+      </div>
+      <button class="btn primary" id="login-btn">Entrar con Google</button>
+      <button class="btn hidden" id="logout-btn">Cerrar sesión</button>
+      <button class="btn primary admin-only hidden" id="sync-btn">Guardar lista en Firebase</button>
+      <button class="btn" id="export-btn">Exportar datos</button>
+      <button class="btn admin-only hidden" id="import-btn">Importar datos</button>
+      <input class="hidden" type="file" id="import-file" accept=".json,application/json">
+      <button class="btn ghost danger admin-only hidden" id="reset-btn">Restablecer ejemplo</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <nav class="tabs" aria-label="Secciones">
+        <button class="tab active" data-page="levels">Lista</button>
+        <button class="tab" data-page="players">Jugadores</button>
+      </nav>
+      <div class="local-pill" id="cloud-state">○ conectando</div>
+    </header>
+
+    <div class="content">
+      <section class="page active" id="page-levels">
+        <div class="page-head">
+          <div><h1 class="title">Demon List</h1><p class="sub" id="level-count"></p></div>
+          <div class="head-actions"><button class="btn primary admin-only hidden" id="add-level">+ Agregar nivel</button></div>
+        </div>
+        <div class="list" id="level-list"></div>
+      </section>
+      <section class="page" id="page-players">
+        <div class="page-head">
+          <div><h1 class="title">Jugadores</h1><p class="sub" id="player-count"></p></div>
+          <div class="head-actions"><button class="btn primary admin-only hidden" id="add-player">+ Agregar jugador</button></div>
+        </div>
+        <div class="list" id="player-list"></div>
+      </section>
+    </div>
+  </main>
+
+  <dialog id="level-dialog">
+    <form method="dialog" id="level-form">
+      <div class="dlg-head"><h2 id="level-dialog-title">Agregar nivel</h2><button class="icon" value="cancel" aria-label="Cerrar">×</button></div>
+      <div class="dlg-body">
+        <input type="hidden" id="level-uid">
+        <div class="form-grid">
+          <div class="field full"><label for="level-name">Nombre</label><input id="level-name" required maxlength="80"></div>
+          <div class="field"><label for="level-id">ID de Geometry Dash</label><input id="level-id" inputmode="numeric" maxlength="20"></div>
+          <div class="field"><label for="level-diff">Dificultad</label><select id="level-diff"><option>Extreme Demon</option><option>Insane Demon</option><option>Hard Demon</option><option>Medium Demon</option><option>Easy Demon</option><option>Sin asignar</option></select></div>
+          <div class="field"><label for="level-creator">Creador</label><input id="level-creator" maxlength="40"></div>
+          <div class="field"><label for="level-verifier">Verificador</label><input id="level-verifier" maxlength="40" list="players-datalist"></div>
+          <div class="field"><label for="level-atts">Intentos</label><input id="level-atts" inputmode="numeric" maxlength="12"></div>
+          <div class="field"><label for="level-video">Video / showcase (URL)</label><input id="level-video" type="url"></div>
+          <div class="field full"><label for="level-notes">Descripción</label><textarea id="level-notes" maxlength="400"></textarea></div>
+        </div>
+        <div class="sep"></div>
+        <p class="eyebrow">Completions</p>
+        <div id="completion-fields"></div>
+        <button type="button" class="btn" id="add-completion">+ Agregar completion</button>
+        <p class="hint">Las completions se muestran al expandir el jugador. El verificador también cuenta como completion.</p>
+      </div>
+      <div class="dlg-actions"><button class="btn" value="cancel">Cancelar</button><button class="btn primary" value="default" id="save-level">Guardar</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="player-dialog">
+    <form method="dialog" id="player-form">
+      <div class="dlg-head"><h2 id="player-dialog-title">Agregar jugador</h2><button class="icon" value="cancel" aria-label="Cerrar">×</button></div>
+      <div class="dlg-body">
+        <input type="hidden" id="player-uid">
+        <div class="form-grid">
+          <div class="field full"><label for="player-name">Nombre</label><input id="player-name" required maxlength="40"></div>
+        </div>
+        <p class="hint">Luego podés asignarle completions editando cada nivel.</p>
+      </div>
+      <div class="dlg-actions"><button class="btn" value="cancel">Cancelar</button><button class="btn primary" value="default">Guardar</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="confirm-dialog">
+    <form method="dialog">
+      <div class="dlg-head"><h2 id="confirm-title">Confirmar</h2><button class="icon" value="cancel">×</button></div>
+      <div class="dlg-body"><p id="confirm-message"></p></div>
+      <div class="dlg-actions"><button class="btn" value="cancel">Cancelar</button><button class="btn danger" value="default">Eliminar</button></div>
+    </form>
+  </dialog>
+  <datalist id="players-datalist"></datalist>
+  <div class="toast" id="toast"></div>
+
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+  import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-database.js";
+  import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCqhCM3-5Wg0IvyMQ3csxOHD9Ty6zQy0EM",
+    authDomain: "shitty-listv2.firebaseapp.com",
+    databaseURL: "https://shitty-listv2-default-rtdb.firebaseio.com",
+    projectId: "shitty-listv2",
+    storageBucket: "shitty-listv2.firebasestorage.app",
+    messagingSenderId: "341337793623",
+    appId: "1:341337793623:web:d7d0e1bb0009c1c1f1af12",
+    measurementId: "G-P7GRT3HH0B"
+  };
+
+  const firebaseApp = initializeApp(firebaseConfig);
+  const database = getDatabase(firebaseApp);
+  const auth = getAuth(firebaseApp);
+
+  (() => {
+    "use strict";
+    const KEY = "slate-list-local-v1";
+    const uid = () => (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36)+Math.random().toString(36).slice(2));
+    const seed = {
+      version:1,
+      players:[
+        {uid:"p-sonex",name:"sonex46"},{uid:"p-macu",name:"Macucasss"},{uid:"p-zdux",name:"Zdux80"},
+        {uid:"p-dann",name:"Dannnnnnnnnnnnnnn"},{uid:"p-thomas",name:"ThomasTubeStar"},{uid:"p-pequ",name:"DrPequ"},
+        {uid:"p-surix",name:"Surix26"},{uid:"p-manuel",name:"ManuelBreg"},{uid:"p-paty",name:"paty_quemado"}
+      ],
+      levels:[
+        {uid:"l1",name:"Shittytarus",gdId:"138098512",difficulty:"Hard Demon",creator:"Macucasss",verifier:"Macucasss",attempts:"706",video:"",notes:"",completions:[{player:"sonex46",attempts:"798"}]},
+        {uid:"l2",name:"Shittouement",gdId:"",difficulty:"Hard Demon",creator:"",verifier:"sonex46",attempts:"",video:"",notes:"",completions:[]},
+        {uid:"l3",name:"Shittien Circles",gdId:"",difficulty:"Hard Demon",creator:"",verifier:"sonex46",attempts:"",video:"",notes:"",completions:[]},
+        {uid:"l4",name:"Death Shittydor",gdId:"",difficulty:"Insane Demon",creator:"",verifier:"Macucasss",attempts:"",video:"",notes:"",completions:[{player:"sonex46",attempts:""}]},
+        {uid:"l5",name:"Shittygeist",gdId:"",difficulty:"Insane Demon",creator:"",verifier:"Macucasss",attempts:"",video:"",notes:"",completions:[{player:"sonex46",attempts:""}]},
+        {uid:"l6",name:"The Shittymare",gdId:"",difficulty:"Insane Demon",creator:"",verifier:"sonex46",attempts:"",video:"",notes:"",completions:[]},
+        {uid:"l7",name:"Parashitty Circles",gdId:"",difficulty:"Medium Demon",creator:"",verifier:"sonex46",attempts:"",video:"",notes:"Es accesible, buen GP y es divertido.",completions:[]},
+        {uid:"l8",name:"Aiespaiwitmailitelle",gdId:"",difficulty:"Medium Demon",creator:"",verifier:"sonex46",attempts:"",video:"",notes:"",completions:[]},
+        {uid:"l9",name:"Probleshittier",gdId:"",difficulty:"Hard Demon",creator:"",verifier:"sonex46",attempts:"",video:"",notes:"",completions:[]},
+        {uid:"l10",name:"Phitty",gdId:"",difficulty:"Medium Demon",creator:"",verifier:"sonex46",attempts:"",video:"",notes:"",completions:[{player:"Zdux80",attempts:""}]},
+        {uid:"l11",name:"Retro Shirtcles",gdId:"",difficulty:"Medium Demon",creator:"",verifier:"sonex46",attempts:"",video:"",notes:"",completions:[]},
+        {uid:"l12",name:"Speed Shittier",gdId:"",difficulty:"Easy Demon",creator:"",verifier:"Dannnnnnnnnnnnnnn",attempts:"",video:"",notes:"",completions:[{player:"sonex46",attempts:""},{player:"Zdux80",attempts:""}]}
+      ]
+    };
+    let state = load(), page = "levels", query = "", difficulty = "", openLevels = new Set(), openPlayers = new Set(), pendingConfirm = null;
+    let currentUser = null, isAdmin = false, cloudReady = false, stopAdminListener = null;
+    const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+    const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+    const clone = o => JSON.parse(JSON.stringify(o));
+    function load(){try{const x=JSON.parse(localStorage.getItem(KEY));if(x&&Array.isArray(x.levels)&&Array.isArray(x.players))return x}catch(e){}return clone(seed)}
+    async function save(message="Cambios guardados"){
+      if(!isAdmin){toast("Solo el administrador puede guardar");render();return}
+      localStorage.setItem(KEY,JSON.stringify(state));render();
+      try{await set(ref(database,"slateList"),state);toast(message)}
+      catch(err){console.error(err);toast("Guardado local; Firebase rechazó el cambio")}
+    }
+    function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("show");clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove("show"),1800)}
+    function diffClass(d){return "diff-"+({Extreme:"extreme",Insane:"insane",Hard:"hard",Medium:"medium",Easy:"easy"}[String(d).split(" ")[0]]||"")}
+    function allNames(){return [...new Set([...state.players.map(p=>p.name),...state.levels.flatMap(l=>[l.verifier,...l.completions.map(c=>c.player)])].filter(Boolean))]}
+    function rankPlayers(){
+      const map=new Map(allNames().map(name=>[name.toLowerCase(),{name,completions:[],score:0}]));
+      state.levels.forEach((l,i)=>{
+        const add=(name,role,attempts)=>{
+          if(!name)return;const k=name.toLowerCase();if(!map.has(k))map.set(k,{name,completions:[],score:0});
+          const p=map.get(k);if(!p.completions.some(c=>c.levelUid===l.uid)){p.completions.push({levelUid:l.uid,level:l.name,rank:i+1,role,attempts});p.score+=Math.max(1,state.levels.length-i)}
+        };
+        add(l.verifier,"Verificador",l.attempts);
+        l.completions.forEach(c=>add(c.player,"Completion",c.attempts));
+      });
+      return [...map.values()].sort((a,b)=>b.score-a.score||b.completions.length-a.completions.length||a.name.localeCompare(b.name));
+    }
+    function render(){
+      const q=query.trim().toLowerCase();
+      const levels=state.levels.map((l,i)=>({...l,rank:i+1})).filter(l=>(!difficulty||l.difficulty===difficulty)&&(!q||[l.name,l.creator,l.verifier,l.gdId].join(" ").toLowerCase().includes(q)));
+      $("#level-count").textContent=`${levels.length} de ${state.levels.length} niveles`;
+      $("#level-list").innerHTML=levels.length?levels.map(levelHTML).join(""):'<div class="no-data">No hay niveles que coincidan con la búsqueda.</div>';
+      const players=rankPlayers().filter(p=>!q||p.name.toLowerCase().includes(q));
+      $("#player-count").textContent=`${players.length} jugadores`;
+      $("#player-list").innerHTML=players.length?players.map((p,i)=>playerHTML(p,i+1)).join(""):'<div class="no-data">No hay jugadores que coincidan con la búsqueda.</div>';
+      $("#players-datalist").innerHTML=allNames().map(n=>`<option value="${esc(n)}">`).join("");
+      $("#level-filters").classList.toggle("hidden",page!=="levels");
+    }
+    function levelHTML(l){
+      const isOpen=openLevels.has(l.uid), idx=state.levels.findIndex(x=>x.uid===l.uid);
+      return `<article class="level ${isOpen?"open":""}" data-level="${esc(l.uid)}">
+        <div class="row" role="button" tabindex="0" aria-expanded="${isOpen}">
+          <div class="rank"><div>#${l.rank}</div><small>Top</small></div>
+          <div class="summary"><div class="name">${esc(l.name)}</div><div class="meta">
+            ${l.gdId?`<span class="badge">#${esc(l.gdId)}</span>`:""}<span class="badge ${diffClass(l.difficulty)}">${esc(l.difficulty||"Sin asignar")}</span>
+            ${l.attempts?`<span class="badge optional">${esc(l.attempts)} ATTs</span>`:""}${l.verifier?`<span class="optional">Verificador: <b>${esc(l.verifier)}</b></span>`:""}
+          </div></div>
+          <div class="row-tools">
+            ${isAdmin?`
+            <button class="icon move" data-action="up" title="Subir" ${idx===0?"disabled":""}>↑</button>
+            <button class="icon move" data-action="down" title="Bajar" ${idx===state.levels.length-1?"disabled":""}>↓</button>
+            <button class="icon" data-action="edit" title="Editar">✎</button>
+            <button class="icon" data-action="delete" title="Eliminar">×</button>`:""}
+            <button class="icon chev" data-action="toggle" title="Ampliar">⌄</button>
+          </div>
+        </div>
+        <div class="details"><div class="info"><div class="info-title">Información</div><div class="kv">
+          <div><div class="k">Nombre</div><div class="v">${esc(l.name)}</div></div>
+          <div><div class="k">ID</div><div class="v ${l.gdId?"":"empty"}">${l.gdId?`<a class="link" target="_blank" rel="noopener" href="https://gdbrowser.com/${encodeURIComponent(l.gdId)}">${esc(l.gdId)} ↗</a>`:"—"}</div></div>
+          <div><div class="k">Dificultad</div><div class="v">${esc(l.difficulty||"Sin asignar")}</div></div>
+          <div><div class="k">Creador</div><div class="v ${l.creator?"":"empty"}">${esc(l.creator||"—")}</div></div>
+          <div><div class="k">Verificador</div><div class="v ${l.verifier?"":"empty"}">${esc(l.verifier||"—")}</div></div>
+          <div><div class="k">Intentos</div><div class="v ${l.attempts?"":"empty"}">${esc(l.attempts||"—")}</div></div>
+          ${l.notes?`<div style="grid-column:1/-1"><div class="k">Descripción</div><div class="v">${esc(l.notes)}</div></div>`:""}
+          ${l.video?`<div><div class="k">Enlace</div><div class="v"><a class="link" href="${esc(l.video)}" target="_blank" rel="noopener">Abrir video ↗</a></div></div>`:""}
+        </div></div></div>
+      </article>`;
+    }
+    function playerHTML(p,rank){
+      const isOpen=openPlayers.has(p.name.toLowerCase());
+      const comps=p.completions.sort((a,b)=>a.rank-b.rank);
+      return `<article class="player ${isOpen?"open":""}" data-player="${esc(p.name)}">
+        <div class="row" role="button" tabindex="0" aria-expanded="${isOpen}">
+          <div class="rank">${p.score?`#${rank}`:"—"}</div>
+          <div class="summary"><div class="name">${esc(p.name)}</div></div>
+          <div class="row-tools">${isAdmin?`<button class="icon" data-player-action="edit" title="Renombrar">✎</button><button class="icon" data-player-action="delete" title="Eliminar">×</button>`:""}<button class="icon chev" data-player-action="toggle" title="Mostrar completions">⌄</button></div>
+        </div>
+        <div class="details">${comps.length?`<div class="completions">${comps.map(c=>`<div class="completion"><span class="pos">Top ${c.rank}</span><b>${esc(c.level)}</b><span class="role">${esc(c.role)}${c.attempts?` · ${esc(c.attempts)} ATTs`:""}</span></div>`).join("")}</div>`:'<div class="no-data">Este jugador todavía no tiene completions.</div>'}</div>
+      </article>`;
+    }
+    function switchPage(next){
+      page=next;$$(".tab").forEach(b=>b.classList.toggle("active",b.dataset.page===next));$$(".page").forEach(p=>p.classList.toggle("active",p.id===`page-${next}`));$("#search").placeholder=next==="levels"?"Nivel, creador o verificador…":"Nombre del jugador…";render();
+    }
+    function openLevel(id){
+      const l=id?state.levels.find(x=>x.uid===id):null;
+      $("#level-dialog-title").textContent=l?"Editar nivel":"Agregar nivel";$("#level-uid").value=l?.uid||"";$("#level-name").value=l?.name||"";$("#level-id").value=l?.gdId||"";$("#level-diff").value=l?.difficulty||"Extreme Demon";$("#level-creator").value=l?.creator||"";$("#level-verifier").value=l?.verifier||"";$("#level-atts").value=l?.attempts||"";$("#level-video").value=l?.video||"";$("#level-notes").value=l?.notes||"";$("#completion-fields").innerHTML="";(l?.completions||[]).forEach(addCompletionField);$("#level-dialog").showModal();setTimeout(()=>$("#level-name").focus(),50);
+    }
+    function addCompletionField(c={}){
+      const row=document.createElement("div");row.className="form-grid completion-edit";row.style.marginBottom="8px";row.innerHTML=`<div class="field"><label>Jugador</label><input class="comp-player" maxlength="40" list="players-datalist" value="${esc(c.player||"")}"></div><div class="field"><label>Intentos</label><div style="display:flex;gap:6px"><input class="comp-atts" inputmode="numeric" value="${esc(c.attempts||"")}"><button type="button" class="icon remove-completion">×</button></div></div>`;$("#completion-fields").append(row);
+    }
+    function submitLevel(e){
+      e.preventDefault();const name=$("#level-name").value.trim();if(!name){$("#level-name").focus();return}
+      const data={uid:$("#level-uid").value||uid(),name,gdId:$("#level-id").value.trim(),difficulty:$("#level-diff").value,creator:$("#level-creator").value.trim(),verifier:$("#level-verifier").value.trim(),attempts:$("#level-atts").value.trim(),video:$("#level-video").value.trim(),notes:$("#level-notes").value.trim(),completions:$$(".completion-edit").map(r=>({player:r.querySelector(".comp-player").value.trim(),attempts:r.querySelector(".comp-atts").value.trim()})).filter(c=>c.player)};
+      const i=state.levels.findIndex(x=>x.uid===data.uid);if(i<0)state.levels.push(data);else state.levels[i]=data;$("#level-dialog").close();save(i<0?"Nivel agregado":"Nivel actualizado");
+    }
+    function openPlayer(name=""){
+      const p=state.players.find(x=>x.name.toLowerCase()===name.toLowerCase());$("#player-dialog-title").textContent=p?"Renombrar jugador":"Agregar jugador";$("#player-uid").value=p?.uid||"";$("#player-name").value=p?.name||"";$("#player-dialog").showModal();setTimeout(()=>$("#player-name").focus(),50);
+    }
+    function submitPlayer(e){
+      e.preventDefault();const name=$("#player-name").value.trim();if(!name)return;const id=$("#player-uid").value, existing=state.players.find(p=>p.uid===id);
+      if(allNames().some(n=>n.toLowerCase()===name.toLowerCase()&&(!existing||n.toLowerCase()!==existing.name.toLowerCase()))){toast("Ese jugador ya existe");return}
+      if(existing){const old=existing.name;existing.name=name;state.levels.forEach(l=>{if(l.verifier.toLowerCase()===old.toLowerCase())l.verifier=name;l.completions.forEach(c=>{if(c.player.toLowerCase()===old.toLowerCase())c.player=name})})}else state.players.push({uid:uid(),name});
+      $("#player-dialog").close();save(existing?"Jugador renombrado":"Jugador agregado");
+    }
+    function confirm(title,message,action){$("#confirm-title").textContent=title;$("#confirm-message").textContent=message;pendingConfirm=action;$("#confirm-dialog").showModal()}
+    document.addEventListener("click",e=>{
+      const tab=e.target.closest(".tab");if(tab)return switchPage(tab.dataset.page);
+      const lf=e.target.closest(".filter");if(lf){difficulty=lf.dataset.filter;$$(".filter").forEach(b=>b.classList.toggle("active",b===lf));return render()}
+      const level=e.target.closest("[data-level]"), act=e.target.closest("[data-action]");
+      if(level){const id=level.dataset.level;if(act){e.stopPropagation();const i=state.levels.findIndex(x=>x.uid===id);if(act.dataset.action==="edit")return openLevel(id);if(act.dataset.action==="delete")return confirm("Eliminar nivel",`¿Eliminar “${state.levels[i].name}”?`,()=>{state.levels.splice(i,1);openLevels.delete(id);save("Nivel eliminado")});if(act.dataset.action==="up"&&i>0){[state.levels[i-1],state.levels[i]]=[state.levels[i],state.levels[i-1]];return save("Nivel movido")};if(act.dataset.action==="down"&&i<state.levels.length-1){[state.levels[i+1],state.levels[i]]=[state.levels[i],state.levels[i+1]];return save("Nivel movido")}}openLevels.has(id)?openLevels.delete(id):openLevels.add(id);return render()}
+      const player=e.target.closest("[data-player]"), pa=e.target.closest("[data-player-action]");
+      if(player){const name=player.dataset.player;if(pa){e.stopPropagation();if(pa.dataset.playerAction==="edit")return openPlayer(name);if(pa.dataset.playerAction==="delete")return confirm("Eliminar jugador",`¿Eliminar a “${name}” y quitar sus completions?`,()=>{state.players=state.players.filter(p=>p.name.toLowerCase()!==name.toLowerCase());state.levels.forEach(l=>{if(l.verifier.toLowerCase()===name.toLowerCase())l.verifier="";l.completions=l.completions.filter(c=>c.player.toLowerCase()!==name.toLowerCase())});openPlayers.delete(name.toLowerCase());save("Jugador eliminado")})}const k=name.toLowerCase();openPlayers.has(k)?openPlayers.delete(k):openPlayers.add(k);return render()}
+      if(e.target.closest(".remove-completion"))e.target.closest(".completion-edit").remove();
+    });
+    document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.matches(".row")){e.preventDefault();e.target.click()}});
+    function updateAuthUI(){
+      $("#login-btn").classList.toggle("hidden",!!currentUser);
+      $("#logout-btn").classList.toggle("hidden",!currentUser);
+      $$(".admin-only").forEach(e=>e.classList.toggle("hidden",!isAdmin));
+      $("#auth-name").textContent=currentUser?(currentUser.displayName||currentUser.email||"Usuario"):"Visitante";
+      $("#auth-state").textContent=isAdmin?"Administrador":currentUser?"Sin permisos de edición":"Solo lectura";
+      $("#auth-uid").classList.toggle("hidden",!currentUser||isAdmin);
+      $("#auth-uid").textContent=currentUser&&!isAdmin?`UID: ${currentUser.uid}`:"";
+    }
+    function setCloudState(text,online){
+      $("#cloud-state").textContent=`${online?"●":"○"} ${text}`;
+    }
+    onValue(ref(database,"slateList"),snapshot=>{
+      cloudReady=true;setCloudState("Firebase conectado",true);
+      if(snapshot.exists()){
+        const remote=snapshot.val();
+        if(remote&&Array.isArray(remote.levels)&&Array.isArray(remote.players)){
+          state=remote;localStorage.setItem(KEY,JSON.stringify(state));render();
+        }
+      }
+    },error=>{console.error(error);cloudReady=false;setCloudState("modo local",false);toast("Firebase no permite leer todavía")});
+    onAuthStateChanged(auth,user=>{
+      currentUser=user;isAdmin=false;
+      if(stopAdminListener){stopAdminListener();stopAdminListener=null}
+      if(user){
+        stopAdminListener=onValue(ref(database,`admins/${user.uid}`),snapshot=>{
+          isAdmin=snapshot.val()===true;updateAuthUI();render();
+          if(!isAdmin)toast("Copiá tu UID y agregalo en Firebase para ser administrador");
+        },error=>{console.error(error);isAdmin=false;updateAuthUI();render()});
+      }else{updateAuthUI();render()}
+    });
+    $("#login-btn").onclick=async()=>{try{await signInWithPopup(auth,new GoogleAuthProvider())}catch(err){console.error(err);toast("No se pudo iniciar sesión. Revisá Authentication")}};
+    $("#logout-btn").onclick=()=>signOut(auth);
+    $("#sync-btn").onclick=()=>save("Lista guardada en Firebase");
+    $("#auth-uid").onclick=async()=>{if(!currentUser)return;try{await navigator.clipboard.writeText(currentUser.uid);toast("UID copiado")}catch(e){toast(currentUser.uid)}};
+    $("#search").addEventListener("input",e=>{query=e.target.value;render()});$("#add-level").onclick=()=>openLevel();$("#add-player").onclick=()=>openPlayer();$("#add-completion").onclick=()=>addCompletionField();$("#level-form").addEventListener("submit",submitLevel);$("#player-form").addEventListener("submit",submitPlayer);
+    $("#confirm-dialog").addEventListener("close",()=>{if($("#confirm-dialog").returnValue==="default"&&pendingConfirm)pendingConfirm();pendingConfirm=null});
+    $("#export-btn").onclick=()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`slate-list-backup-${new Date().toISOString().slice(0,10)}.json`;a.click();URL.revokeObjectURL(a.href);toast("Copia exportada")};
+    $("#import-btn").onclick=()=>$("#import-file").click();$("#import-file").onchange=async e=>{try{const x=JSON.parse(await e.target.files[0].text());if(!Array.isArray(x.levels)||!Array.isArray(x.players))throw 0;state=x;save("Datos importados")}catch(err){toast("El archivo no es válido")}e.target.value=""};
+    $("#reset-btn").onclick=()=>confirm("Restablecer datos","Se reemplazarán los datos locales por el ejemplo inicial.",()=>{state=clone(seed);openLevels.clear();openPlayers.clear();save("Datos restablecidos")});
+    render();
+  })();
+  </script>
+</body>
+</html>
