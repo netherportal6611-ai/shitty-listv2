@@ -181,7 +181,6 @@
   <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
   import { getDatabase, ref, set, update, get, onValue } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-database.js";
-  import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-storage.js";
   import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
 
   const firebaseConfig = {
@@ -197,7 +196,6 @@
 
   const firebaseApp = initializeApp(firebaseConfig);
   const database = getDatabase(firebaseApp);
-  const storage = getStorage(firebaseApp);
   const auth = getAuth(firebaseApp);
 
   (() => {
@@ -355,24 +353,37 @@
       $("#profile-bio").value=p.bio||"";
       $("#profile-dialog").showModal();
     }
-    async function uploadImage(file,path){
-      if(!file)return "";
-      if(!file.type.startsWith("image/"))throw new Error("invalid-image");
-      if(file.size>5*1024*1024)throw new Error("image-too-large");
-      const ext=(file.name.split(".").pop()||"jpg").replace(/[^a-z0-9]/gi,"").toLowerCase();
-      const target=storageRef(storage,`${path}/${Date.now()}.${ext}`);
-      const result=await uploadBytes(target,file,{contentType:file.type});
-      return getDownloadURL(result.ref);
+    function imageToDataURL(file,maxWidth,maxHeight,quality=.8){
+      return new Promise((resolve,reject)=>{
+        if(!file?.type.startsWith("image/"))return reject(new Error("invalid-image"));
+        if(file.size>5*1024*1024)return reject(new Error("image-too-large"));
+        const reader=new FileReader();
+        reader.onerror=()=>reject(new Error("read-error"));
+        reader.onload=()=>{
+          const image=new Image();
+          image.onerror=()=>reject(new Error("invalid-image"));
+          image.onload=()=>{
+            const scale=Math.min(maxWidth/image.width,maxHeight/image.height,1);
+            const canvas=document.createElement("canvas");
+            canvas.width=Math.max(1,Math.round(image.width*scale));
+            canvas.height=Math.max(1,Math.round(image.height*scale));
+            canvas.getContext("2d").drawImage(image,0,0,canvas.width,canvas.height);
+            resolve(canvas.toDataURL("image/jpeg",quality));
+          };
+          image.src=reader.result;
+        };
+        reader.readAsDataURL(file);
+      });
     }
     async function submitProfile(e){
       e.preventDefault();if(!currentUser)return;
       const name=$("#profile-name").value.trim();if(!name)return $("#profile-name").focus();
       try{
         const file=$("#profile-photo-file").files[0];
-        const photoURL=file?await uploadImage(file,`profiles/${currentUser.uid}`):editingProfileImage;
+        const photoURL=file?await imageToDataURL(file,320,320,.82):editingProfileImage;
         await update(ref(database,`profiles/${currentUser.uid}`),{name,photoURL,bio:$("#profile-bio").value.trim(),updatedAt:Date.now()});
         $("#profile-dialog").close();toast("Perfil actualizado");
-      }catch(err){console.error(err);toast(err.message==="image-too-large"?"La imagen supera los 5 MB":"No se pudo subir la imagen","error")}
+      }catch(err){console.error(err);toast(err.message==="image-too-large"?"La imagen supera los 5 MB":"No se pudo procesar la imagen","error")}
     }
     function switchPage(next){
       page=next;if(next==="profile"&&!viewedProfileUid)viewedProfileUid=currentUser?.uid||null;$$(".tab").forEach(b=>b.classList.toggle("active",b.dataset.page===next));$$(".page").forEach(p=>p.classList.toggle("active",p.id===`page-${next}`));$("#search").placeholder=next==="levels"?"Nivel, creador o verificador…":next==="players"?"Nombre del jugador o usuario…":"Buscar…";render();
@@ -390,10 +401,10 @@
       const levelUid=$("#level-uid").value||uid();
       try{
         const file=$("#level-image-file").files[0];
-        const image=file?await uploadImage(file,`level-thumbnails/${levelUid}`):editingLevelImage;
+        const image=file?await imageToDataURL(file,960,540,.8):editingLevelImage;
         const data={uid:levelUid,name,image,gdId:$("#level-id").value.trim(),difficulty:$("#level-diff").value,creator:$("#level-creator").value.trim(),verifier:$("#level-verifier").value.trim(),attempts:$("#level-atts").value.trim(),video:$("#level-video").value.trim(),notes:$("#level-notes").value.trim(),completions:$$(".completion-edit").map(r=>({player:r.querySelector(".comp-player").value.trim(),attempts:r.querySelector(".comp-atts").value.trim()})).filter(c=>c.player)};
         const i=state.levels.findIndex(x=>x.uid===data.uid);if(i<0)state.levels.push(data);else state.levels[i]={...state.levels[i],...data};$("#level-dialog").close();save(i<0?"Nivel agregado":"Nivel actualizado");
-      }catch(err){console.error(err);toast(err.message==="image-too-large"?"La miniatura supera los 5 MB":"No se pudo subir la miniatura","error")}
+      }catch(err){console.error(err);toast(err.message==="image-too-large"?"La miniatura supera los 5 MB":"No se pudo procesar la miniatura","error")}
     }
     function openPlayer(name=""){
       const p=state.players.find(x=>x.name.toLowerCase()===name.toLowerCase());$("#player-dialog-title").textContent=p?"Renombrar jugador":"Agregar jugador";$("#player-uid").value=p?.uid||"";$("#player-name").value=p?.name||"";$("#player-dialog").showModal();setTimeout(()=>$("#player-name").focus(),50);
