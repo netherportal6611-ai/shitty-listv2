@@ -61,13 +61,12 @@
     .user-metrics{display:flex;gap:8px;flex-wrap:wrap;margin-top:7px}.user-metric{font-size:9px;color:var(--soft);padding:2px 6px;border:1px solid var(--line);border-radius:5px;background:rgba(0,0,0,.12)}.user-date{margin-left:auto;align-self:center;font-size:9px;color:var(--muted);white-space:nowrap}
     .profile-insights{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:16px;border-bottom:1px solid var(--line);background:#0c1014}.insight{padding:14px;border:1px solid var(--line);border-radius:10px;background:linear-gradient(145deg,#171c22,#11151a)}.insight-label{font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;font-weight:850}.insight-value{margin-top:5px;font-size:14px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.recent-activity{padding:18px 22px;border-bottom:1px solid var(--line)}.recent-activity h3{margin:0 0 10px;font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--soft)}.activity-row{display:flex;align-items:center;gap:9px;padding:8px 0;border-top:1px solid var(--line);font-size:11px}.activity-row:first-of-type{border-top:0}.activity-mark{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px rgba(120,185,141,.35)}.activity-row span:last-child{margin-left:auto;color:var(--muted)}
     .filter-summary{margin-top:22px;padding:13px;border:1px solid var(--line);border-radius:10px;background:linear-gradient(145deg,#151a20,#101419);display:grid;gap:10px}.filter-summary>div{display:flex;justify-content:space-between;gap:8px}.filter-summary span{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.filter-summary strong{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.filter-summary .btn{width:100%;min-height:31px;padding:5px 8px}
-    .list-overview{display:grid;grid-template-columns:.75fr 1.25fr 1.15fr 1.5fr;gap:9px;margin-bottom:12px}.overview-card{position:relative;min-height:110px;padding:17px;border:1px solid var(--line);border-radius:12px;background:linear-gradient(145deg,rgba(255,255,255,.035),transparent 60%),var(--panel);overflow:hidden}.overview-card::after{content:"";position:absolute;width:90px;height:90px;right:-45px;top:-45px;border-radius:50%;background:rgba(255,255,255,.025)}.overview-card span{display:block;font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.13em;font-weight:850}.overview-card strong{display:block;margin-top:12px;font-size:23px;line-height:1.1;letter-spacing:-.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.overview-card small{display:block;margin-top:6px;color:#737d88;font-size:9px}.overview-card.featured{background:radial-gradient(circle at 90% 10%,rgba(232,200,79,.12),transparent 45%),linear-gradient(145deg,#181c20,#11151a);border-color:#3d4036}
-    .community-strip{margin-bottom:18px;border:1px solid var(--line);border-radius:12px;background:#0e1216;overflow:hidden}.community-strip-head{display:flex;justify-content:space-between;align-items:center;padding:11px 15px;border-bottom:1px solid var(--line);font-size:10px;text-transform:uppercase;letter-spacing:.09em;font-weight:850}.community-strip-head small{color:var(--muted);font-size:8px}.activity-pulse{display:inline-block;width:7px;height:7px;margin-right:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(120,185,141,.09),0 0 12px rgba(120,185,141,.35)}.activity-feed{display:flex;gap:7px;padding:10px;overflow-x:auto;scrollbar-width:thin}.feed-item{flex:0 0 auto;display:flex;align-items:center;gap:7px;max-width:300px;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:#151a20;font-size:10px}.feed-item b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.feed-item time{color:var(--muted);font-size:8px}.feed-empty{padding:4px 6px;color:var(--muted);font-size:10px}
+    .list-overview{display:grid;grid-template-columns:.75fr 1.25fr 1.15fr 1.5fr;gap:9px;margin-bottom:18px}.overview-card{min-height:110px;padding:17px;border:1px solid #36404a;border-radius:8px;background:#171c22;box-shadow:0 1px 0 rgba(255,255,255,.025)}.overview-card span{display:block;font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.13em;font-weight:850}.overview-card strong{display:block;margin-top:12px;font-size:23px;line-height:1.1;letter-spacing:-.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.overview-card small{display:block;margin-top:6px;color:#737d88;font-size:9px}.overview-card.featured{background:#171c22;border-color:#36404a}
     .level{position:relative}.level::after{content:"";position:absolute;left:78px;right:0;bottom:0;height:2px;background:var(--card-accent,#3c454f);opacity:.42}.level[data-difficulty="Extreme Demon"]{--card-accent:#ef5962}.level[data-difficulty="Insane Demon"]{--card-accent:#f28b43}.level[data-difficulty="Hard Demon"]{--card-accent:#e8c84f}.level[data-difficulty="Medium Demon"]{--card-accent:#58c77a}.level[data-difficulty="Easy Demon"]{--card-accent:#5eb7e6}.level[data-difficulty="Insane"]{--card-accent:#d96ce8}.victor-count{font-size:9px;color:var(--muted);white-space:nowrap}.level,.player{animation-delay:var(--delay,0ms)}
     .profile-shell{display:grid;grid-template-columns:340px minmax(0,1fr)}.profile-hero{grid-column:1;grid-row:1/3;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;border-right:1px solid var(--line);border-bottom:0}.profile-main{width:100%}.profile-stats{grid-column:1;grid-row:3;grid-template-columns:repeat(3,minmax(0,1fr));border-right:1px solid var(--line)}.profile-stat{padding:16px 11px;text-align:center}.profile-insights{grid-column:2;grid-row:1}.recent-activity{grid-column:2;grid-row:2/4}.profile-sections{grid-column:1/-1}
     @keyframes cardIn{from{opacity:0;transform:translateY(10px) scale(.992)}to{opacity:1;transform:none}}
     @media(max-width:820px){.topbar{height:62px;padding:0 10px}.content{padding:27px 13px 70px}.title{font-size:29px}.row{grid-template-columns:58px minmax(0,1fr) auto;min-height:74px}.profile-hero{padding:21px}.tab{height:35px;padding:0 11px}.mobile-menu{border-radius:8px}.profile-insights{grid-template-columns:1fr}.podium{grid-template-columns:1fr}.podium-card,.podium-card.first{min-height:auto;order:initial;text-align:left;padding:13px 16px}.podium-place,.podium-name,.podium-score{display:inline;margin:0 10px 0 0}.list-overview{grid-template-columns:1fr 1fr}.profile-shell{display:block}.profile-hero{display:grid;border-right:0;border-bottom:1px solid var(--line)}.profile-stats{border-right:0}.profile-insights,.recent-activity,.profile-sections{display:grid}.overview-card{min-height:98px}}
-    @media(max-width:480px){.top-actions>.btn{padding:7px 8px}.tab{padding:0 8px;font-size:8px}.content{padding-top:22px}.level,.player{border-radius:9px}.page-head{margin-bottom:18px}.profile-stats{grid-template-columns:repeat(3,minmax(0,1fr))}.profile-stat{padding:15px 9px;text-align:center}.profile-stat strong{font-size:20px}.user-date{display:none}.list-overview{grid-template-columns:1fr}.overview-card{min-height:88px}.community-strip-head small,.victor-count{display:none}}
+    @media(max-width:480px){.top-actions>.btn{padding:7px 8px}.tab{padding:0 8px;font-size:8px}.content{padding-top:22px}.level,.player{border-radius:9px}.page-head{margin-bottom:18px}.profile-stats{grid-template-columns:repeat(3,minmax(0,1fr))}.profile-stat{padding:15px 9px;text-align:center}.profile-stat strong{font-size:20px}.user-date{display:none}.list-overview{grid-template-columns:1fr}.overview-card{min-height:88px}.victor-count{display:none}}
   </style>
 </head>
 <body>
@@ -137,10 +136,6 @@
           <div class="overview-card"><span>Última actualización</span><strong id="overview-updated">—</strong><small id="overview-update-detail">Sin actividad</small></div>
           <div class="overview-card"><span>Dificultad principal</span><strong id="overview-difficulty">—</strong><small id="overview-difficulty-count">Sin niveles</small></div>
           <div class="overview-card featured"><span>Más reciente</span><strong id="overview-recent">—</strong><small>último nivel de la lista</small></div>
-        </div>
-        <div class="community-strip">
-          <div class="community-strip-head"><div><span class="activity-pulse"></span>Actividad de la comunidad</div><small>Últimos cambios</small></div>
-          <div class="activity-feed" id="community-activity"></div>
         </div>
         <div class="list" id="level-list"></div>
       </section>
@@ -253,7 +248,7 @@
     "use strict";
     const KEY = "slate-list-local-v1";
     const uid = () => (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36)+Math.random().toString(36).slice(2));
-    const seed = {version:1,players:[],levels:[],activity:[]};
+    const seed = {version:1,revision:0,players:[],levels:[],activity:[]};
     const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
     const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
     const clone = o => JSON.parse(JSON.stringify(o));
@@ -266,6 +261,7 @@
       if(!isAdmin){toast("Solo el administrador puede guardar");render();return}
       state.activity=Array.isArray(state.activity)?state.activity:[];
       if(message&&!/guardada en Firebase/i.test(message)){
+        state.revision=(Number.isInteger(state.revision)?state.revision:0)+1;
         state.activity.unshift({id:uid(),message,createdAt:Date.now()});
         state.activity=state.activity.slice(0,30);
       }
@@ -311,14 +307,13 @@
       const activity=Array.isArray(state.activity)?state.activity:[];
       const last=activity[0], recent=state.levels[state.levels.length-1];
       $("#overview-levels").textContent=state.levels.length;
-      $("#overview-updated").textContent=last?timeAgo(last.createdAt):"—";
-      $("#overview-update-detail").textContent=last?.message||"Sin actividad";
+      $("#overview-updated").textContent=`1.${Number.isInteger(state.revision)?state.revision:0}`;
+      $("#overview-update-detail").textContent=last?`${last.message} · ${timeAgo(last.createdAt)}`:"Versión inicial";
       $("#overview-difficulty").textContent=common?.[0]||"—";
       $("#overview-difficulty-count").textContent=common?`${common[1]} niveles`:"Sin niveles";
       $("#overview-recent").textContent=recent?.name||"—";
       $("#side-visible-count").textContent=`${visibleLevels.length} niveles`;
       $("#side-filter-name").textContent=difficulty||query.trim()||"Sin filtros";
-      $("#community-activity").innerHTML=activity.length?activity.slice(0,8).map(item=>`<div class="feed-item"><span class="activity-mark"></span><b>${esc(item.message)}</b><time>${esc(timeAgo(item.createdAt))}</time></div>`).join(""):'<div class="feed-empty">La actividad aparecerá cuando se realicen cambios en la lista.</div>';
     }
     function render(){
       const q=query.trim().toLowerCase();
@@ -558,7 +553,7 @@
       if(snapshot.exists()){
         const remote=snapshot.val();
         if(remote&&Array.isArray(remote.levels)&&Array.isArray(remote.players)){
-          state=remote;state.activity=Array.isArray(state.activity)?state.activity:[];localStorage.setItem(KEY,JSON.stringify(state));render();
+          state=remote;state.activity=Array.isArray(state.activity)?state.activity:[];state.revision=Number.isInteger(state.revision)?state.revision:0;localStorage.setItem(KEY,JSON.stringify(state));render();
         }
       }else{
         state=clone(seed);localStorage.removeItem(KEY);render();
