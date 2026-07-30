@@ -284,6 +284,7 @@
     const KEY = "slate-list-local-v1";
     const uid = () => (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36)+Math.random().toString(36).slice(2));
     const seed = {version:1,players:[],levels:[],activity:[],playerLinks:{},bannedUsers:{}};
+    const RANK_POINTS = [250,238,227,217,207,198,190,182,174,168,161,155,149,144,139,134,130,126,122,118];
     const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
     const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
     const clone = o => JSON.parse(JSON.stringify(o));
@@ -291,7 +292,18 @@
     let profiles = {}, playerView = "ranking", viewedProfileUid = null, editingLevelImage = "", editingProfileImage = "", editingCubeImage = "";
     const ADMIN_EMAIL = "netherportal6611@gmail.com";
     let currentUser = null, isAdmin = false;
-    function load(){localStorage.removeItem(KEY);return clone(seed)}
+    function load(){
+      try{
+        const saved=JSON.parse(localStorage.getItem(KEY));
+        if(saved&&Array.isArray(saved.levels)&&Array.isArray(saved.players)){
+          saved.activity=Array.isArray(saved.activity)?saved.activity:[];
+          saved.playerLinks=saved.playerLinks||{};
+          saved.bannedUsers=saved.bannedUsers||{};
+          return saved;
+        }
+      }catch(err){console.warn("No se pudo recuperar la copia local",err)}
+      return clone(seed);
+    }
     async function save(message="Cambios guardados"){
       if(!isAdmin){toast("Solo el administrador puede guardar");render();return}
       state.activity=Array.isArray(state.activity)?state.activity:[];
@@ -320,7 +332,7 @@
       state.levels.forEach((l,i)=>{
         const add=(name,role,attempts)=>{
           if(!name)return;const k=name.toLowerCase();if(!map.has(k))map.set(k,{name,completions:[],score:0});
-          const p=map.get(k);if(!p.completions.some(c=>c.levelUid===l.uid)){p.completions.push({levelUid:l.uid,level:l.name,rank:i+1,role,attempts});p.score+=Math.max(1,state.levels.length-i)}
+          const p=map.get(k);if(!p.completions.some(c=>c.levelUid===l.uid)){p.completions.push({levelUid:l.uid,level:l.name,rank:i+1,role,attempts});p.score+=RANK_POINTS[i]??Math.max(1,118-(i-19)*4)}
         };
         add(l.verifier,"Verificador",l.attempts);
         l.completions.forEach(c=>add(c.player,"Completion",c.attempts));
@@ -412,7 +424,7 @@
       return `<article class="player ${isOpen?"open":""}" style="--delay:${Math.min(rank-1,12)*24}ms" data-player="${esc(p.name)}">
         <div class="row" role="button" tabindex="0" aria-expanded="${isOpen}">
           <div class="rank">${p.score?`#${rank}`:"—"}</div>
-          <div class="summary"><div class="name">${esc(p.name)}</div></div>
+          <div class="summary"><div class="name">${esc(p.name)}</div><div class="meta"><span><b>${p.score}</b> puntos</span><span>· ${p.completions.length} niveles</span></div></div>
           <div class="row-tools">${isAdmin?`<button class="icon" data-player-action="edit" title="Renombrar">✎</button><button class="icon" data-player-action="delete" title="Eliminar">×</button>`:""}<button class="icon chev" data-player-action="toggle" title="Mostrar completions">⌄</button></div>
         </div>
         <div class="details">${comps.length?`<div class="completions">${comps.map(c=>`<div class="completion"><span class="pos">Top ${c.rank}</span><b>${esc(c.level)}</b><span class="role">${esc(c.role)}${c.attempts?` · ${esc(c.attempts)} ATTs`:""}</span></div>`).join("")}</div>`:'<div class="no-data">Este jugador todavía no tiene completions.</div>'}</div>
@@ -633,7 +645,8 @@
           state=remote;state.activity=Array.isArray(state.activity)?state.activity:[];state.playerLinks=state.playerLinks||{};state.bannedUsers=state.bannedUsers||{};localStorage.setItem(KEY,JSON.stringify(state));enforceBan();render();
         }
       }else{
-        state=clone(seed);localStorage.removeItem(KEY);render();
+        if(!Array.isArray(state.levels)||!Array.isArray(state.players))state=clone(seed);
+        render();
       }
       setLoading(false);
     },error=>{console.error(error);setLoading(false);toast("Firebase no permite leer todavía","error")});
