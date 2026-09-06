@@ -256,13 +256,29 @@
       <div class="dlg-actions"><button class="btn" value="cancel">Cancelar</button><button class="btn primary" value="default">Guardar perfil</button></div>
     </form>
   </dialog>
+
+  <dialog id="auth-dialog">
+    <form id="auth-form">
+      <div class="dlg-head"><h2 id="auth-title">Iniciar sesión</h2><button type="button" class="icon" id="auth-close" aria-label="Cerrar">×</button></div>
+      <div class="dlg-body">
+        <div class="form-grid">
+          <div class="field full"><label for="auth-email">Correo electrónico</label><input id="auth-email" type="email" autocomplete="email" required placeholder="tu@correo.com"></div>
+          <div class="field full"><label for="auth-password">Contraseña</label><input id="auth-password" type="password" autocomplete="current-password" required minlength="6" placeholder="Mínimo 6 caracteres"></div>
+        </div>
+        <p class="hint" id="auth-hint">Ingresá con el correo y la contraseña de tu cuenta.</p>
+        <div class="sep"></div>
+        <button type="button" class="btn" id="google-auth-btn" style="width:100%">Continuar con Google</button>
+      </div>
+      <div class="dlg-actions"><button type="button" class="btn" id="auth-cancel">Cancelar</button><button type="submit" class="btn primary" id="auth-submit">Iniciar sesión</button></div>
+    </form>
+  </dialog>
   <datalist id="players-datalist"></datalist>
   <div class="toast" id="toast"></div>
 
   <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
   import { getDatabase, ref, set, update, get, onValue } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-database.js";
-  import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+  import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyCqhCM3-5Wg0IvyMQ3csxOHD9Ty6zQy0EM",
@@ -509,7 +525,7 @@
     }
     function openPublicProfile(id){viewedProfileUid=id;switchPage("profile")}
     function openProfileEditor(){
-      if(!currentUser)return openGoogleAuth();
+      if(!currentUser)return openAuth("login");
       const p=profiles[currentUser.uid]||{};
       $("#profile-name").value=p.name||currentUser.displayName||"";
       editingProfileImage=p.photoURL||currentUser.photoURL||"";
@@ -600,7 +616,7 @@
       const adminTool=e.target.closest("[data-admin-tool]");if(adminTool&&isAdmin){const tool=adminTool.dataset.adminTool;if(tool==="sync")return save("Lista guardada en Firebase");if(tool==="import")return $("#import-file").click();if(tool==="add-level")return openLevel()}
       const profileCard=e.target.closest("[data-open-profile]");if(profileCard)return openPublicProfile(profileCard.dataset.openProfile);
       if(e.target.closest("[data-edit-profile]"))return openProfileEditor();
-      if(e.target.closest("[data-profile-login]"))return openGoogleAuth();
+      if(e.target.closest("[data-profile-login]"))return openAuth("login");
       const lf=e.target.closest(".filter");if(lf){const deselect=difficulty===lf.dataset.filter;difficulty=deselect?"":lf.dataset.filter;$$(".filter").forEach(b=>b.classList.toggle("active",!deselect&&b===lf));setSidebar(false);return render()}
       const level=e.target.closest("[data-level]"), act=e.target.closest("[data-action]");
       if(level){const id=level.dataset.level;if(act){e.stopPropagation();const i=state.levels.findIndex(x=>x.uid===id),levelName=state.levels[i]?.name||"El nivel";if(act.dataset.action==="edit")return openLevel(id);if(act.dataset.action==="delete")return confirm("Eliminar nivel",`¿Eliminar “${levelName}”?`,()=>{state.levels.splice(i,1);openLevels.delete(id);save(`${levelName} fue eliminado de la lista`)});if(act.dataset.action==="up"&&i>0){[state.levels[i-1],state.levels[i]]=[state.levels[i],state.levels[i-1]];return save(`${levelName} subió al puesto ${i}`)};if(act.dataset.action==="down"&&i<state.levels.length-1){[state.levels[i+1],state.levels[i]]=[state.levels[i],state.levels[i+1]];return save(`${levelName} bajó al puesto ${i+2}`)}}openLevels.has(id)?openLevels.delete(id):openLevels.add(id);return render()}
@@ -667,11 +683,53 @@
         }).catch(err=>{console.error(err);toast("No se pudo crear el perfil","error")});
       }
     });
+    let authMode = "login";
+    function openAuth(mode="login"){
+      authMode=mode==="register"?"register":"login";
+      const registering=authMode==="register";
+      $("#auth-title").textContent=registering?"Crear cuenta":"Iniciar sesión";
+      $("#auth-submit").textContent=registering?"Crear cuenta":"Iniciar sesión";
+      $("#auth-hint").textContent=registering?"Creá una cuenta con correo y contraseña. La contraseña debe tener al menos 6 caracteres.":"Ingresá con el correo y la contraseña de tu cuenta.";
+      $("#auth-password").autocomplete=registering?"new-password":"current-password";
+      $("#auth-password").value="";
+      $("#auth-dialog").showModal();
+      setTimeout(()=>$("#auth-email").focus(),0);
+    }
+    const authErrorMessage=err=>({
+      "auth/invalid-email":"El correo no es válido",
+      "auth/invalid-credential":"Correo o contraseña incorrectos",
+      "auth/user-not-found":"No existe una cuenta con ese correo",
+      "auth/wrong-password":"La contraseña es incorrecta",
+      "auth/email-already-in-use":"Ya existe una cuenta con ese correo",
+      "auth/weak-password":"La contraseña debe tener al menos 6 caracteres",
+      "auth/user-disabled":"Esta cuenta está deshabilitada",
+      "auth/too-many-requests":"Demasiados intentos. Probá de nuevo más tarde",
+      "auth/operation-not-allowed":"Activá Email/Password en Firebase Authentication"
+    }[err?.code]||"No se pudo completar el acceso");
+    $("#auth-form").addEventListener("submit",async e=>{
+      e.preventDefault();
+      const email=$("#auth-email").value.trim();
+      const password=$("#auth-password").value;
+      if(password.length<6)return toast("La contraseña debe tener al menos 6 caracteres","error");
+      const submit=$("#auth-submit");
+      submit.disabled=true;
+      try{
+        if(authMode==="register")await createUserWithEmailAndPassword(auth,email,password);
+        else await signInWithEmailAndPassword(auth,email,password);
+        $("#auth-dialog").close();
+        toast(authMode==="register"?"Cuenta creada":"Sesión iniciada");
+      }catch(err){
+        console.error(err);
+        toast(authErrorMessage(err),"error");
+      }finally{submit.disabled=false}
+    });
+    $("#auth-close").onclick=$("#auth-cancel").onclick=()=>$("#auth-dialog").close();
     const googleProvider = new GoogleAuthProvider();
     googleProvider.setCustomParameters({prompt:"select_account"});
     async function openGoogleAuth(){
       try{
         await signInWithPopup(auth,googleProvider);
+        if($("#auth-dialog").open)$("#auth-dialog").close();
       }catch(err){
         console.error(err);
         const messages={
@@ -681,11 +739,12 @@
           "auth/cancelled-popup-request":"Ya hay una ventana de inicio de sesión abierta",
           "auth/operation-not-allowed":"Activá Google como proveedor en Firebase"
         };
-        toast(messages[err?.code]||"No se pudo iniciar sesión con Google");
+        toast(messages[err?.code]||"No se pudo iniciar sesión con Google","error");
       }
     }
-    $("#login-btn").onclick=openGoogleAuth;
-    $("#register-btn").onclick=openGoogleAuth;
+    $("#google-auth-btn").onclick=openGoogleAuth;
+    $("#login-btn").onclick=()=>openAuth("login");
+    $("#register-btn").onclick=()=>openAuth("register");
     $("#logout-btn").onclick=()=>signOut(auth);
     $("#account-logout").onclick=()=>signOut(auth);
     $("#account-button").onclick=e=>{e.stopPropagation();$("#account-menu").classList.toggle("open")};
